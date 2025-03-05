@@ -15,7 +15,7 @@ public class DeathController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Controller.Instance.playerDead) & (deathMenu != null) & (!gameRestarting))
+        if ((GameController.Instance.playerDead) & (deathMenu != null) & (!gameRestarting))
         {
             Time.timeScale = 0; 
             deathMenu.SetActive(true);

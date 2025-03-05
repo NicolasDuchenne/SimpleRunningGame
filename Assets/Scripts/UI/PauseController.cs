@@ -40,4 +40,10 @@ public class GamePauseManager : MonoBehaviour
         Time.timeScale = 1; // Ensure time resumes before restarting
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void GoToMenu()
+    {
+        Time.timeScale = 1; // Ensure time resumes before restarting
+        SceneManager.LoadScene(0);
+    }
 }

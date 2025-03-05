@@ -7,4 +7,12 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // Arrête le jeu dans l'éditeur
+        #endif
+    }
 }

@@ -1,4 +1,5 @@
 using System;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -18,35 +19,45 @@ public class PlayerController : MonoBehaviour
     private GameObject Models;
     private GameObject Colliders;
     private bool hasDisappeared = false;
+    private PlayerInputs playerInputs;
+
+    private Rigidbody rb;
+
+    private Vector3 targetPosition;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         Models = transform.Find("Models").gameObject;
         Colliders = transform.Find("Colliders").gameObject;
+        playerInputs = GetComponent<PlayerInputs>();
     }
 
-    
-    void Update()
+
+    void FixedUpdate()
     {
+        targetPosition = transform.position;
         ProcessForwardMovement();
         ProcessLane();
+        rb.MovePosition(targetPosition);
     }
 
     private void ProcessForwardMovement()
     {
-        transform.position = transform.position + Vector3.forward * forwardSpeed * Time.deltaTime;
+        targetPosition += Vector3.forward * forwardSpeed * Time.deltaTime;
     }
     private void ProcessLane()
     {
         ProcessNumberOfLaneChange();
         StartLaneChange();
         ProcessLaneChange();
+        
     }
 
     private void ProcessNumberOfLaneChange()
     {
         numberOfLaneChange = 1;
-        if(Input.GetKey(KeyCode.Space))
+        if(playerInputs.disappear)
         {
             numberOfLaneChange = 2;
         }
@@ -56,7 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isChangingLane == false)
         {
-            float horizontalInput =  Input.GetAxis("Horizontal");
+            float horizontalInput = playerInputs.horizontalInput;
             if (Math.Abs(horizontalInput) > 0.2f)
             {
                 int newLane = Math.Clamp(lane + Math.Sign(horizontalInput) * numberOfLaneChange, minLane, maxLane);
@@ -82,33 +93,38 @@ public class PlayerController : MonoBehaviour
             {
                 tmpX = targetX;
                 isChangingLane = false;
+                if (doubleLaneChange)
+                {
+                    Appear();
+                }
             }
-            else if (distance<laneWidth*0.2)
+            else if (distance<numberOfLaneChange*laneWidth*0.2)
             {
                 if (doubleLaneChange)
                 {
                     Appear();
                 }
             }
-            else if (distance<laneWidth*0.8)
+            else if (distance<numberOfLaneChange*laneWidth*0.8)
             {
+                
                 if(doubleLaneChange)
                 {
                     Disappear();
                 }
             }
             
-            
-            transform.position = new Vector3(tmpX, transform.position.y, transform.position.z);
-            
+            targetPosition += new Vector3(tmpX-transform.position.x, 0, 0);        
         }
     }
+
 
     private void Disappear()
     {
         if (hasDisappeared == false)
         {
             Models.SetActive(false);
+            //Colliders.GetComponent<BoxCollider>().enabled= false;
             Colliders.SetActive(false);
             hasDisappeared = true;
         }
@@ -121,6 +137,7 @@ public class PlayerController : MonoBehaviour
         {
             Models.SetActive(true);
             Colliders.SetActive(true);
+            //Colliders.GetComponent<BoxCollider>().enabled= true;
             hasDisappeared = false;
         } 
     }

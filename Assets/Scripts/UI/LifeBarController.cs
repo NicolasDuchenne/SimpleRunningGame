@@ -7,17 +7,17 @@ public class LifeBarController : MonoBehaviour
 {
 
     [SerializeField] float maxLife = 100f;
-    private Image Back;
-    private Image Front;
-
-
+    private Slider healthBar;
+    [SerializeField] Serum.SerumType serumType;
     public float life { get; private set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         life = maxLife;
-        Back = transform.Find("Back").GetComponent<Image>();
-        Front = transform.Find("Front").GetComponent<Image>();
+        healthBar = GetComponent<Slider>();
+        healthBar.minValue = 0;
+        healthBar.maxValue = maxLife;
+        UpdateLifeBar();
     }
 
     // Update is called once per frame
@@ -26,10 +26,6 @@ public class LifeBarController : MonoBehaviour
         UpdateLifeBar();
     }
 
-    private void UpdateLifeBar()
-    {
-        Front.rectTransform.sizeDelta = new Vector2((float)(Back.rectTransform.sizeDelta.x * ((float)life / maxLife)), Back.rectTransform.sizeDelta.y);
-    }
 
     public bool TakeDamage(float damage)
     {
@@ -51,4 +47,15 @@ public class LifeBarController : MonoBehaviour
         life += heal;
         life = Math.Min(life, maxLife);
     }
+
+    public Serum.SerumType GetSerumType()
+    {
+        return serumType;
+    }
+
+    private void UpdateLifeBar()
+    {
+        healthBar.value = life;
+    }
 }
+
