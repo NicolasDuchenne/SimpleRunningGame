@@ -5,13 +5,14 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float forwardSpeed = 10f;
+    [SerializeField] float startForwardSpeed = 10f;
+    private float forwardSpeed;
+    private float totalIncreasePercent=0;
     [SerializeField] float lateralSpeed = 20f;
     private bool isChangingLane = false;
-    [SerializeField] float laneWidth = 2f;
+    [SerializeField] float increaseSpeedDelaySec= 3f;
+    [SerializeField] float increasePercent = 1f;
     private int lane = 0;
-    private int minLane = -2;
-    private int maxLane = 2;
     private float targetX;
     private int numberOfLaneChange = 1;
     private int realNumberOfLaneChange = 1;
@@ -31,11 +32,20 @@ public class PlayerController : MonoBehaviour
         Models = transform.Find("Models").gameObject;
         Colliders = transform.Find("Colliders").gameObject;
         playerInputs = GetComponent<PlayerInputs>();
+        forwardSpeed = startForwardSpeed;
+        InvokeRepeating("IncreaseSpeed", increaseSpeedDelaySec, increaseSpeedDelaySec); // Call `ChangeValue` every 2 seconds
+    }
+
+    void IncreaseSpeed()
+    {
+        totalIncreasePercent+=increasePercent;
+        forwardSpeed = startForwardSpeed * Math.Min(300,100+totalIncreasePercent)/100;
     }
 
 
     void FixedUpdate()
     {
+        
         targetPosition = transform.position;
         ProcessForwardMovement();
         ProcessLane();
@@ -70,12 +80,12 @@ public class PlayerController : MonoBehaviour
             float horizontalInput = playerInputs.horizontalInput;
             if (Math.Abs(horizontalInput) > 0.2f)
             {
-                int newLane = Math.Clamp(lane + Math.Sign(horizontalInput) * numberOfLaneChange, minLane, maxLane);
+                int newLane = Math.Clamp(lane + Math.Sign(horizontalInput) * numberOfLaneChange, GameController.Instance.minLane, GameController.Instance.maxLane);
                 if (lane != newLane)
                 {
                     realNumberOfLaneChange = Math.Abs(lane-newLane);
                     
-                    targetX = transform.position.x + Math.Sign(horizontalInput) * laneWidth * realNumberOfLaneChange;
+                    targetX = transform.position.x + Math.Sign(horizontalInput) * GameController.Instance.laneWidth * realNumberOfLaneChange;
                     isChangingLane = true;
                     lane = newLane;
                 }
@@ -98,14 +108,14 @@ public class PlayerController : MonoBehaviour
                     Appear();
                 }
             }
-            else if (distance<numberOfLaneChange*laneWidth*0.2)
+            else if (distance<numberOfLaneChange*GameController.Instance.laneWidth*0.2)
             {
                 if (doubleLaneChange)
                 {
                     Appear();
                 }
             }
-            else if (distance<numberOfLaneChange*laneWidth*0.8)
+            else if (distance<numberOfLaneChange*GameController.Instance.laneWidth*0.8)
             {
                 
                 if(doubleLaneChange)

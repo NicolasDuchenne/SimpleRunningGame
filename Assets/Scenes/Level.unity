@@ -2054,9 +2054,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb0f67de0e7dc044821f6f39db7837e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 10
+  startForwardSpeed: 10
   lateralSpeed: 10
   laneWidth: 3
+  increaseSpeedDelaySec: 3
+  increasePercent: 10
 --- !u!114 &973531841
 MonoBehaviour:
   m_ObjectHideFlags: 0

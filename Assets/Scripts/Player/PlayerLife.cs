@@ -9,7 +9,8 @@ public class PlayerLife : MonoBehaviour
     public bool isDead { get; private set; } = false;
     void Start()
     {
-
+        ActivateLifeBar(Serum.SerumType.alpha);
+        ActivateLifeBar(Serum.SerumType.beta);
     }
 
     // Update is called once per frame
@@ -48,8 +49,20 @@ public class PlayerLife : MonoBehaviour
                         lifebarController.Heal(healthGain);
                     else
                         isDead = lifebarController.TakeDamage(healthGain);
-                    serum.Destroy();
                 }
+            }
+            serum.Destroy();
+        }
+    }
+
+    public void ActivateLifeBar(Serum.SerumType serumType)
+    {
+        foreach (LifeBarController lifebarController in lifeBars)
+        {
+            Serum.SerumType lifebarSerumType = lifebarController.GetSerumType();
+            if (lifebarSerumType == serumType)
+            {
+                lifebarController.SetActive(true);
             }
         }
     }
