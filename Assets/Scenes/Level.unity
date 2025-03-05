@@ -2418,7 +2418,7 @@ MonoBehaviour:
   - {fileID: 1450686424}
   - {fileID: 1935657259}
   - {fileID: 831323170}
-  lifeLoseRate: 1
+  lifeLoseRate: 5
 --- !u!114 &973531842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4030,11 +4030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3388666357903660631, guid: 274a5970dea4cff41b0b8fa9ec5fc4e6, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3388666357903660631, guid: 274a5970dea4cff41b0b8fa9ec5fc4e6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000965505337064307, guid: 274a5970dea4cff41b0b8fa9ec5fc4e6, type: 3}
       propertyPath: m_Pivot.x

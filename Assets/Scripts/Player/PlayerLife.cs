@@ -21,9 +21,9 @@ public class PlayerLife : MonoBehaviour
 
     private void ApplyConstantDamage()
     {
-        foreach (LifeBarController lifebarController in lifeBars)
+        foreach (LifeBarController lifeBarController in lifeBars)
         {
-            isDead = lifebarController.TakeDamage(lifeLoseRate * Time.deltaTime);
+            TakeDamage(lifeBarController, lifeLoseRate * Time.deltaTime);
         }
     }
 
@@ -34,21 +34,21 @@ public class PlayerLife : MonoBehaviour
 
     private void ProcessSerumTrigger(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Serum"))
+        if(other.transform.parent.gameObject.CompareTag("Serum"))
         {
             Serum serum = other.transform.parent.gameObject.GetComponent<Serum>();
             Serum.SerumType otherSerumType = serum.GetSerumType();
-            foreach (LifeBarController lifebarController in lifeBars)
+            foreach (LifeBarController lifeBarController in lifeBars)
             {
-                Serum.SerumType lifebarSerumType = lifebarController.GetSerumType();
-                if (lifebarSerumType == otherSerumType)
+                Serum.SerumType lifeBarSerumType = lifeBarController.GetSerumType();
+                if (lifeBarSerumType == otherSerumType)
                 {
                     bool isCatalyseur = serum.IsCatalyseur();
                     float healthGain = serum.GetHealthGain();
                     if (isCatalyseur==false)
-                        lifebarController.Heal(healthGain);
+                        lifeBarController.Heal(healthGain);
                     else
-                        isDead = lifebarController.TakeDamage(healthGain);
+                        TakeDamage(lifeBarController,healthGain);
                 }
             }
             serum.Destroy();
@@ -64,6 +64,15 @@ public class PlayerLife : MonoBehaviour
             {
                 lifebarController.SetActive(true);
             }
+        }
+    }
+
+    private void TakeDamage(LifeBarController lifeBarController, float damage)
+    {
+        bool tmpIsDead = lifeBarController.TakeDamage(damage);
+        if (tmpIsDead)
+        {
+            isDead = true;
         }
     }
 

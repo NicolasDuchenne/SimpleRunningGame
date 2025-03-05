@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2ed8c4174853d39489edd7f987eb20db, type: 2}
     - target: {fileID: 665867301354592264, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_Name
-      value: Alpha
+      value: Serum_Alpha
       objectReference: {fileID: 0}
     - target: {fileID: 665867301354592264, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Serum
       objectReference: {fileID: 0}
     - target: {fileID: 5855605295421324410, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_LocalPosition.x

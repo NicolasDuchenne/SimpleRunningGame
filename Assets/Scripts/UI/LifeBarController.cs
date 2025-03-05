@@ -33,7 +33,10 @@ public class LifeBarController : MonoBehaviour
         if(activated)
         {
             if (damage < 0)
-            throw new ArgumentOutOfRangeException(nameof(damage), "Value must be positive.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(damage), "Value must be positive.");
+            }
+                
             life -= damage;
             life = Math.Max(life, 0);
             if (life == 0)
@@ -49,7 +52,10 @@ public class LifeBarController : MonoBehaviour
         if (activated)
         {
             if (heal < 0)
-            throw new ArgumentOutOfRangeException(nameof(heal), "Value must be positive.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(heal), "Value must be positive.");
+            }
+            
             life += heal;
             life = Math.Min(life, maxLife);
         }

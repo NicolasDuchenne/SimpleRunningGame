@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5855605295421324410}
   - component: {fileID: -8829629731894641163}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Serum
-  m_TagString: Untagged
+  m_TagString: Serum
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8172054503317278509}
   - component: {fileID: 3550979755382816494}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6334337685276436539}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 4312578323874199570}
   - component: {fileID: 5275085002428340088}
   - component: {fileID: 56877901424748677}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
