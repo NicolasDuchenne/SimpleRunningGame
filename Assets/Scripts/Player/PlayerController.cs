@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool isChangingLane = false;
     [SerializeField] float increaseSpeedDelaySec= 3f;
     [SerializeField] float increasePercent = 1f;
+    [SerializeField] float maxIncreasePercent = 300f;
     private int lane = 0;
     private float targetX;
     private int numberOfLaneChange = 1;
@@ -26,20 +27,32 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 targetPosition;
 
+    private Animator animator;
+
+
+
     void Start()
     {
+        animator = transform.Find("Models").transform.Find("Player").GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         Models = transform.Find("Models").gameObject;
         Colliders = transform.Find("Colliders").gameObject;
         playerInputs = GetComponent<PlayerInputs>();
         forwardSpeed = startForwardSpeed;
-        InvokeRepeating("IncreaseSpeed", increaseSpeedDelaySec, increaseSpeedDelaySec); // Call `ChangeValue` every 2 seconds
+        InvokeRepeating("IncreaseSpeed", increaseSpeedDelaySec, increaseSpeedDelaySec); // Call `ChangeValue` every 2 seconds    
+        SetAnimationBlendSpeed();
     }
 
     void IncreaseSpeed()
     {
         totalIncreasePercent+=increasePercent;
-        forwardSpeed = startForwardSpeed * Math.Min(300,100+totalIncreasePercent)/100;
+        forwardSpeed = startForwardSpeed * Math.Min(maxIncreasePercent,100+totalIncreasePercent)/100;
+        SetAnimationBlendSpeed();
+    }
+
+    private void SetAnimationBlendSpeed()
+    {
+        animator.SetFloat("Blend", Math.Min(maxIncreasePercent,100+totalIncreasePercent)/100);
     }
 
 

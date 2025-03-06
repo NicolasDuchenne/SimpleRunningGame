@@ -17,6 +17,7 @@ public class DeathController : MonoBehaviour
     {
         if ((GameController.Instance.playerDead) & (deathMenu != null) & (!gameRestarting))
         {
+            Debug.Log(GameController.Instance.playerDead);
             Time.timeScale = 0; 
             deathMenu.SetActive(true);
             gameRestarting = true;

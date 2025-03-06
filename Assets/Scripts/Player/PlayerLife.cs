@@ -6,9 +6,10 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] LifeBarController[] lifeBars;
     [SerializeField] float lifeLoseRate = 1f;
 
-    public bool isDead { get; private set; } = false;
+    public bool isDead { get; private set; }
     void Start()
     {
+        isDead = false;
         ActivateLifeBar(Serum.SerumType.alpha);
         ActivateLifeBar(Serum.SerumType.beta);
     }
@@ -69,11 +70,15 @@ public class PlayerLife : MonoBehaviour
 
     private void TakeDamage(LifeBarController lifeBarController, float damage)
     {
-        bool tmpIsDead = lifeBarController.TakeDamage(damage);
-        if (tmpIsDead)
+        if (isDead == false)
         {
-            isDead = true;
-        }
+            bool tmpIsDead = lifeBarController.TakeDamage(damage);
+            if (tmpIsDead)
+            {
+                Debug.Log("I Died");
+                isDead = true;
+            }
+        }  
     }
 
 }

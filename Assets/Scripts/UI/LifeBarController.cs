@@ -11,6 +11,7 @@ public class LifeBarController : MonoBehaviour
     [SerializeField] Serum.SerumType serumType;
     public float life { get; private set; }
     private bool activated = false;
+    private bool startWasLaunched = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +20,7 @@ public class LifeBarController : MonoBehaviour
         healthBar.minValue = 0;
         healthBar.maxValue = maxLife;
         UpdateLifeBar();
+        startWasLaunched = true;
     }
 
     // Update is called once per frame
@@ -30,8 +32,9 @@ public class LifeBarController : MonoBehaviour
 
     public bool TakeDamage(float damage)
     {
-        if(activated)
+        if(activated & startWasLaunched)
         {
+            Debug.Log(life);
             if (damage < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(damage), "Value must be positive.");
@@ -49,7 +52,7 @@ public class LifeBarController : MonoBehaviour
 
     public void Heal(float heal)
     {
-        if (activated)
+        if (activated & startWasLaunched)
         {
             if (heal < 0)
             {
