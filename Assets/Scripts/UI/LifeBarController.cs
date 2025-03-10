@@ -34,7 +34,6 @@ public class LifeBarController : MonoBehaviour
     {
         if(activated & startWasLaunched)
         {
-            Debug.Log(life);
             if (damage < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(damage), "Value must be positive.");

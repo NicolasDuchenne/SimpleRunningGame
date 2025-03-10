@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] float lifeLoseRate = 1f;
 
     public bool isDead { get; private set; }
+    public List<Serum.SerumType> activeSerums = new List<Serum.SerumType>();
     void Start()
     {
         isDead = false;
@@ -64,6 +66,7 @@ public class PlayerLife : MonoBehaviour
             if (lifebarSerumType == serumType)
             {
                 lifebarController.SetActive(true);
+                activeSerums.Add(serumType);
             }
         }
     }
@@ -75,7 +78,6 @@ public class PlayerLife : MonoBehaviour
             bool tmpIsDead = lifeBarController.TakeDamage(damage);
             if (tmpIsDead)
             {
-                Debug.Log("I Died");
                 isDead = true;
             }
         }  

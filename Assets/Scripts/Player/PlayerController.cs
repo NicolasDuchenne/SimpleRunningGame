@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool isChangingLane = false;
     [SerializeField] float increaseSpeedDelaySec= 3f;
     [SerializeField] float increasePercent = 1f;
-    [SerializeField] float maxIncreasePercent = 300f;
+    private float maxIncreasePercent = 300f; // need to change player blend animation if this is changed
     private int lane = 0;
     private float targetX;
     private int numberOfLaneChange = 1;
@@ -33,9 +33,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        animator = transform.Find("Models").transform.Find("Player").GetComponent<Animator>();
+        animator = transform.Find("Models").transform.Find("PlayerModel").GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        Models = transform.Find("Models").gameObject;
+        Models = transform.Find("Models").transform.Find("PlayerModel").transform.Find("head_low").gameObject;
         Colliders = transform.Find("Colliders").gameObject;
         playerInputs = GetComponent<PlayerInputs>();
         forwardSpeed = startForwardSpeed;
