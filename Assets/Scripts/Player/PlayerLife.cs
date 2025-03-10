@@ -9,11 +9,13 @@ public class PlayerLife : MonoBehaviour
 
     public bool isDead { get; private set; }
     public List<Serum.SerumType> activeSerums = new List<Serum.SerumType>();
+    private PlayerController playerController;
     void Start()
     {
         isDead = false;
         ActivateLifeBar(Serum.SerumType.alpha);
         ActivateLifeBar(Serum.SerumType.beta);
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -49,9 +51,14 @@ public class PlayerLife : MonoBehaviour
                     bool isCatalyseur = serum.IsCatalyseur();
                     float healthGain = serum.GetHealthGain();
                     if (isCatalyseur==false)
+                    {
                         lifeBarController.Heal(healthGain);
+                    }
                     else
+                    {
                         TakeDamage(lifeBarController,healthGain);
+                        playerController.LoseSpeed();
+                    }     
                 }
             }
             serum.Destroy();

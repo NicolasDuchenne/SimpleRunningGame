@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Serum
+  - Obstacle
   layers:
   - Default
   - TransparentFX

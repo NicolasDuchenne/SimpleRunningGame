@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,7 +8,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float startForwardSpeed = 10f;
     private float forwardSpeed;
-    private float totalIncreasePercent=0;
+    [SerializeField] float catchupSpeed = 1f;
+    [SerializeField] float speedLose = 0.4f;
+    private float totalIncreasePercent=100;
+    [SerializeField] float minIncreasePercent = 80;
+
+    public float speedMult=1;
+    private float temporaryIncreasePercent;
     [SerializeField] float lateralSpeed = 20f;
     private bool isChangingLane = false;
     [SerializeField] float increaseSpeedDelaySec= 3f;
@@ -31,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
 
 
+
     void Start()
     {
         animator = transform.Find("Models").transform.Find("PlayerModel").GetComponent<Animator>();
@@ -39,20 +47,21 @@ public class PlayerController : MonoBehaviour
         Colliders = transform.Find("Colliders").gameObject;
         playerInputs = GetComponent<PlayerInputs>();
         forwardSpeed = startForwardSpeed;
+        temporaryIncreasePercent = totalIncreasePercent;
         InvokeRepeating("IncreaseSpeed", increaseSpeedDelaySec, increaseSpeedDelaySec); // Call `ChangeValue` every 2 seconds    
         SetAnimationBlendSpeed();
     }
 
-    void IncreaseSpeed()
+    private void IncreaseSpeed()
     {
         totalIncreasePercent+=increasePercent;
-        forwardSpeed = startForwardSpeed * Math.Min(maxIncreasePercent,100+totalIncreasePercent)/100;
-        SetAnimationBlendSpeed();
+        totalIncreasePercent = Math.Min(maxIncreasePercent, totalIncreasePercent);
+        
     }
 
     private void SetAnimationBlendSpeed()
     {
-        animator.SetFloat("Blend", Math.Min(maxIncreasePercent,100+totalIncreasePercent)/100);
+        animator.SetFloat("Blend", speedMult);
     }
 
 
@@ -62,7 +71,17 @@ public class PlayerController : MonoBehaviour
         targetPosition = transform.position;
         ProcessForwardMovement();
         ProcessLane();
+        ProcessSpeedPercent();
         rb.MovePosition(targetPosition);
+        
+    }
+
+    private void ProcessSpeedPercent()
+    {
+        temporaryIncreasePercent = Mathf.Lerp(temporaryIncreasePercent, totalIncreasePercent,catchupSpeed*Time.deltaTime);
+        speedMult = temporaryIncreasePercent/100;
+        forwardSpeed = startForwardSpeed * speedMult;
+        SetAnimationBlendSpeed();
     }
 
     private void ProcessForwardMovement()
@@ -163,5 +182,19 @@ public class PlayerController : MonoBehaviour
             //Colliders.GetComponent<BoxCollider>().enabled= true;
             hasDisappeared = false;
         } 
+    }
+
+    public void LoseSpeed()
+    {
+        temporaryIncreasePercent = Math.Max(minIncreasePercent,(1-speedLose)*totalIncreasePercent);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.parent.gameObject.CompareTag("Obstacle"))
+        {
+            other.transform.parent.GetComponent<ObstacleController>().ProcessCollision(speedMult);
+            LoseSpeed();
+        }
     }
 }
