@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serumType: 0
-  healthGain: 10
+  healthGain: 1
   isCatalyseur: 0
 --- !u!1 &776875175414302061
 GameObject:

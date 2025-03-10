@@ -14,6 +14,10 @@ public class RoadsController : MonoBehaviour
 
     void Start()
     {
+        if (serumParentObject == null | catalyseursParentObject == null)
+        {
+            throw new System.Exception("Parent object non assigné !");
+        }
     }
 
     public void setLevel(GameController.Levels level)
@@ -22,31 +26,27 @@ public class RoadsController : MonoBehaviour
     }
 
 
-    public void InstantiateObjects(Transform parentObject, List<GameObject> prefabsToSpawn)
+    public void InstantiateSerums(List<GameObject> prefabsToSpawn)
     {
-        if (parentObject == null)
-        {
-            throw new System.Exception("Parent object non assigné !");
-        }
-        int i = 0;
-        // Récupère tous les enfants du parentObject
-        foreach (Transform child in parentObject)
+        foreach (Transform child in serumParentObject)
         {
             int random = Random.Range(0, prefabsToSpawn.Count);
             GameObject randomPrefab = prefabsToSpawn[random];
-            Instantiate(randomPrefab, child.position, Quaternion.identity, child);
-            i++;
+            foreach(Transform grandChild in child)
+            {
+                Instantiate(randomPrefab, grandChild.position, Quaternion.identity, grandChild);
+            }
         }
-    }
-
-    public void InstantiateSerums(List<GameObject> prefabsToSpawn)
-    {
-        InstantiateObjects(serumParentObject, prefabsToSpawn);
     }
 
     public void InstantiateCatalyseurs(List<GameObject> prefabsToSpawn)
     {
-        InstantiateObjects(catalyseursParentObject, prefabsToSpawn);
+        foreach (Transform child in catalyseursParentObject)
+        {
+            int random = Random.Range(0, prefabsToSpawn.Count);
+            GameObject randomPrefab = prefabsToSpawn[random];
+            Instantiate(randomPrefab, child.position, Quaternion.identity, child);
+        }
     }
 
 

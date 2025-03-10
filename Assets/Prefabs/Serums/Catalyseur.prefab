@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8829629731894641163, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
+      propertyPath: healthGain
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8829629731894641163, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: isCatalyseur
       value: 1
       objectReference: {fileID: 0}
