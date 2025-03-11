@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class GameController : MonoBehaviour
 
     private GameObject Player;
     private PlayerLife PlayerLife;
+    private PlayerController PlayerController;
 
     [SerializeField] public float laneWidth = 3f;
     [SerializeField] float level2StartSec = 5f;
@@ -46,6 +49,8 @@ public class GameController : MonoBehaviour
     private GameObject[] roadsOnStage;
     [SerializeField] int numberOfRoads = 1;
     public float roadLength {get; private set;}
+    private float minRoadLength = 55;
+    private float maxRoadLength = 85;
     [SerializeField] Transform roadParent;
 
     private void Awake()
@@ -70,6 +75,7 @@ public class GameController : MonoBehaviour
         }
         Player = GameObject.Find("Player");
         PlayerLife = Player.GetComponent<PlayerLife>();
+        PlayerController = Player.GetComponent<PlayerController>();
         Invoke("ChangeToLevel2", level2StartSec);
         Invoke("ChangeToLevel3", level3StartSec);
         LoadSerums();
@@ -86,7 +92,15 @@ public class GameController : MonoBehaviour
     void Update()
     {
         CheckPlayerIsDead();
+        UpdateRoadLength();
         UpdateRoad();
+    }
+
+    private void UpdateRoadLength()
+    {
+        float speedIncreasePercentage = (PlayerController.totalIncreasePercent-100)/(PlayerController.maxIncreasePercent-100);
+        roadLength = (int)Mathf.Lerp(minRoadLength, maxRoadLength,speedIncreasePercentage);
+        Debug.Log(roadLength);
     }
 
     private void InitRoads()
@@ -108,19 +122,29 @@ public class GameController : MonoBehaviour
             
             roadsOnStage[i] = Instantiate(road, roadParent);
         }
-        roadLength = roadsOnStage[0].transform.Find("Planes").transform.Find("PlaneCenter").localScale.z;
+        roadLength = getRoadLength(roadsOnStage[0]);
         float pos = Player.transform.position.z - roadLength/4;
         foreach (var road in roadsOnStage)
         {
             road.GetComponent<RoadsController>().setLevel(level);
+            road.GetComponent<RoadsController>().SetRoadLength(minRoadLength);
+            float tmpRoadLength = getRoadLength(road);
             road.transform.position = new Vector3(0, 0, pos);
-            pos +=roadLength;
+            pos +=tmpRoadLength;
             SpawnObjectsOnRoad(road);
         }
     }
 
+    private float getRoadLength(GameObject road)
+    {
+        float tmpRoadLength = road.transform.Find("Planes").transform.Find("PlaneCenter").localScale.z;
+        return tmpRoadLength;
+    }
+
     private void UpdateRoad()
     {
+        float totalRoadLength = 0;
+        int indexRoadToProcess=-1;
         for (int i =numberOfRoads-1; i>=0; i--)
         {
             GameObject road = roadsOnStage[i];
@@ -136,18 +160,32 @@ public class GameController : MonoBehaviour
             }
             if(road.transform.position.z + roadLength/2<Player.transform.position.z-6f)
             {
-                float z = road.transform.position.z;
-                Destroy(road);
-                int n = Random.Range(0, roads.Count);
-                road = Instantiate(roads[n], roadParent);
-                road.GetComponent<RoadsController>().setLevel(level);
-                road.transform.position = new Vector3(0, 0,z + roadLength * numberOfRoads);
-                SpawnObjectsOnRoad(road);
-                roadsOnStage[i] = road;
-                Score.Instance.EndOfRoad();
+                indexRoadToProcess = i;
+            }
+            else
+            {
+                totalRoadLength+=getRoadLength(road);
             }
         }
+        if (indexRoadToProcess>=0)
+        {
+            GameObject road = roadsOnStage[indexRoadToProcess];
+            float z = road.transform.position.z;
+            float oldRoadLength = getRoadLength(road);
+            Destroy(road);
+            int n = Random.Range(0, roads.Count);
+            road = Instantiate(roads[n], roadParent);
+            road.GetComponent<RoadsController>().setLevel(level);
+            road.GetComponent<RoadsController>().SetRoadLength(roadLength);
+            float newRoadLength = getRoadLength(road);
+            road.transform.position = new Vector3(0, 0,z + totalRoadLength+(oldRoadLength+newRoadLength)/2);
+            SpawnObjectsOnRoad(road);
+            roadsOnStage[indexRoadToProcess] = road;
+            Score.Instance.EndOfRoad();
+        }
+        
     }
+
 
     private void SpawnObjectsOnRoad(GameObject road)
     {

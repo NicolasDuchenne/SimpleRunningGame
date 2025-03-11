@@ -55,5 +55,13 @@ public class RoadsController : MonoBehaviour
         }
     }
 
+    public void SetRoadLength(float length)
+    {
+        foreach(Transform plane in transform.Find("Planes").transform)
+        {
+            plane.localScale = new Vector3(plane.transform.localScale.x, plane.transform.localScale.y, length);
+        }
+    }
+
 
 }

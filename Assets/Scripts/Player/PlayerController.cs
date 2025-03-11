@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float forwardSpeed {get; private set;}
     [SerializeField] float catchupSpeed = 1f;
     [SerializeField] float speedLose = 0.4f;
-    private float totalIncreasePercent=100;
+    public float totalIncreasePercent{get; private set;}=100;
     [SerializeField] float minIncreasePercent = 80;
 
     private float speedMult=1;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool isChangingLane = false;
     [SerializeField] float increaseSpeedDelaySec= 3f;
     [SerializeField] float increasePercent = 1f;
-    private float maxIncreasePercent = 300f; // need to change player blend animation if this is changed
+    public float maxIncreasePercent {get; private set;} = 300f ; // need to change player blend animation if this is changed
     private int lane = 0;
     private float targetX;
     private int numberOfLaneChange = 1;
@@ -35,14 +36,13 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 targetPosition;
 
-    private Animator animator;
+    [SerializeField] Animator animator;
 
 
 
 
     void Start()
     {
-        animator = transform.Find("Models").transform.Find("PlayerModel").GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         Models = transform.Find("Models").transform.Find("PlayerModel").transform.Find("head_low").gameObject;
         Colliders = transform.Find("Colliders").gameObject;
@@ -133,7 +133,21 @@ public class PlayerController : MonoBehaviour
     {
         if (isChangingLane)
         {
-            float tmpX = Mathf.Lerp(transform.position.x, targetX, lateralSpeed * Time.deltaTime);
+            float minSpeed = 0.5f;
+            float tmpX;
+            if (Math.Abs(transform.position.x-targetX)*lateralSpeed<minSpeed) // Compute linear speed if distance*speed is too low else use lerp
+            {
+                tmpX = transform.position.x + Math.Sign(targetX-transform.position.x)*minSpeed*Time.deltaTime;
+                
+                if (Math.Abs(tmpX) > Math.Abs(targetX))
+                {
+                    tmpX = targetX;
+                }
+            }
+            else
+            {
+                tmpX = Mathf.Lerp(transform.position.x, targetX, lateralSpeed * Time.deltaTime);
+            }
             float distance = Math.Abs(tmpX-targetX);
             if (distance<0.05)
             {
@@ -191,6 +205,12 @@ public class PlayerController : MonoBehaviour
     public void LoseSpeed()
     {
         temporaryIncreasePercent = Math.Max(minIncreasePercent,(1-speedLose)*totalIncreasePercent);
+        StartStumble();
+    }
+
+    public void StartStumble()
+    {
+        animator.SetBool("Stumble", true);
     }
 
     private void OnTriggerEnter(Collider other)
