@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
     private List<GameObject> catalyseurPrefabsToSpawn;
     private List<GameObject> catalyseurPrefabsToSpawnFiltered;
 
+    [SerializeField] GameObject firstRoad;
     private List<GameObject> roads;
     private List<GameObject> roadsLevel1;
     private List<GameObject> roadsLevel2;
@@ -44,7 +45,7 @@ public class GameController : MonoBehaviour
 
     private GameObject[] roadsOnStage;
     [SerializeField] int numberOfRoads = 1;
-    private float roadLength;
+    public float roadLength {get; private set;}
     [SerializeField] Transform roadParent;
 
     private void Awake()
@@ -79,6 +80,7 @@ public class GameController : MonoBehaviour
         playerInLevel = Levels.level1;
         FilterSerumAndCatalyseurs();
         InitRoads();
+        Score.Instance.initScore();
     }
 
     void Update()
@@ -92,11 +94,22 @@ public class GameController : MonoBehaviour
         roadsOnStage = new GameObject[numberOfRoads];
         for (int i = 0; i < numberOfRoads; i++)
         {
-            int n = Random.Range(0, roads.Count);
-            roadsOnStage[i] = Instantiate(roads[n], roadParent);
+            GameObject road;
+            if (i==0)
+            {
+                // This way we can chose a first road with no serum or catalyseur
+                road = firstRoad;
+            }
+            else
+            {
+                int n = Random.Range(0, roads.Count);
+                road = roads[n];
+            }
+            
+            roadsOnStage[i] = Instantiate(road, roadParent);
         }
         roadLength = roadsOnStage[0].transform.Find("Planes").transform.Find("PlaneCenter").localScale.z;
-        float pos = Player.transform.position.z + roadLength/4;
+        float pos = Player.transform.position.z - roadLength/4;
         foreach (var road in roadsOnStage)
         {
             road.GetComponent<RoadsController>().setLevel(level);
@@ -113,7 +126,13 @@ public class GameController : MonoBehaviour
             GameObject road = roadsOnStage[i];
             if(Player.transform.position.z > (road.transform.position.z-roadLength/2) & playerInLevel!=road.GetComponent<RoadsController>().level)
             {
-                SetLevel(road.GetComponent<RoadsController>().level);
+                if (road.GetComponent<RoadsController>().active)
+                {
+                    // added because if not there is a bug when switching from level 2 to level3, level 2 road still exists so you go back and forth between 2 and 3
+                    SetLevel(road.GetComponent<RoadsController>().level);
+                    road.GetComponent<RoadsController>().setInactive();
+                }
+                
             }
             if(road.transform.position.z + roadLength/2<Player.transform.position.z-6f)
             {
@@ -125,12 +144,14 @@ public class GameController : MonoBehaviour
                 road.transform.position = new Vector3(0, 0,z + roadLength * numberOfRoads);
                 SpawnObjectsOnRoad(road);
                 roadsOnStage[i] = road;
+                Score.Instance.EndOfRoad();
             }
         }
     }
 
     private void SpawnObjectsOnRoad(GameObject road)
     {
+        FilterSerumAndCatalyseurs();
         road.GetComponent<RoadsController>().InstantiateSerums(serumPrefabsToSpawnFiltered);
         road.GetComponent<RoadsController>().InstantiateCatalyseurs(catalyseurPrefabsToSpawnFiltered);
     }
@@ -141,11 +162,11 @@ public class GameController : MonoBehaviour
         foreach(var serum in inputSerums)
         {
             Serum.SerumType prefabSerumType = serum.GetComponent<Serum>().GetSerumType();
-            foreach(var serumType in PlayerLife.activeSerums)
+            List<Serum.SerumType> activeSerumsWithRatio = PlayerLife.getActiveSerumRatio();
+            foreach(var serumType in activeSerumsWithRatio)
             {
                 if(prefabSerumType==serumType)
                 {
-                    //Debug.Log(serumType);
                     outputSerums.Add(serum);
                 }
             }
@@ -198,8 +219,7 @@ public class GameController : MonoBehaviour
     {
         PlayerLife.ActivateLifeBar(Serum.SerumType.gamma);
         maxLane = 2; 
-        playerInLevel = Levels.level2;
-        FilterSerumAndCatalyseurs();
+        playerInLevel = Levels.level2;    
     }
 
     private void StartLevel3()
@@ -207,7 +227,6 @@ public class GameController : MonoBehaviour
         PlayerLife.ActivateLifeBar(Serum.SerumType.iota);
         minLane = -2;  
         playerInLevel = Levels.level3;
-        FilterSerumAndCatalyseurs();
     }
 
     public List<GameObject> LoadPrefabs(string folderPath)
@@ -237,8 +256,5 @@ public class GameController : MonoBehaviour
         roadsLevel2 = LoadPrefabs(roadsLevel2Path);
         roadsLevel3 = LoadPrefabs(roadsLevel3Path);
     }
-
-
-    
     
 }

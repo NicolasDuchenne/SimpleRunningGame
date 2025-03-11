@@ -1,14 +1,19 @@
+using System;
 using System.Collections.Generic;
+using Unity.IntegerTime;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
 {
     [SerializeField] LifeBarController[] lifeBars;
-    [SerializeField] float lifeLoseRate = 1f;
+
+
+    [SerializeField] float damagePerRoad = 5f;
+    private float lifeLoseRate;
 
     public bool isDead { get; private set; }
-    public List<Serum.SerumType> activeSerums = new List<Serum.SerumType>();
+    public List<Serum.SerumType> activeSerums  {get; private set;}= new List<Serum.SerumType>();
     private PlayerController playerController;
     void Start()
     {
@@ -22,14 +27,23 @@ public class PlayerLife : MonoBehaviour
     void Update()
     {
         ApplyConstantDamage();
+        ProcessLifeLoseRate();
+    }
+
+    private void ProcessLifeLoseRate()
+    {
+        //Dynamically compute life lose rate so that we insure that the player the same amount of life per road finished. This way if you go faster you lose more life
+        lifeLoseRate = damagePerRoad*playerController.forwardSpeed/GameController.Instance.roadLength;
     }
 
     private void ApplyConstantDamage()
     {
+        float damage = lifeLoseRate * Time.deltaTime;
         foreach (LifeBarController lifeBarController in lifeBars)
         {
             TakeDamage(lifeBarController, lifeLoseRate * Time.deltaTime);
         }
+        Score.Instance.IncrementDamage(damage);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,11 +67,13 @@ public class PlayerLife : MonoBehaviour
                     if (isCatalyseur==false)
                     {
                         lifeBarController.Heal(healthGain);
+                        Score.Instance.IncreaseScore(1);
                     }
                     else
                     {
                         TakeDamage(lifeBarController,healthGain);
                         playerController.LoseSpeed();
+                        Score.Instance.ResetMult();
                     }     
                 }
             }
@@ -73,7 +89,10 @@ public class PlayerLife : MonoBehaviour
             if (lifebarSerumType == serumType)
             {
                 lifebarController.SetActive(true);
-                activeSerums.Add(serumType);
+                if (!activeSerums.Contains(serumType))
+                {
+                    activeSerums.Add(serumType);
+                }
             }
         }
     }
@@ -88,6 +107,29 @@ public class PlayerLife : MonoBehaviour
                 isDead = true;
             }
         }  
+    }
+
+    public List<Serum.SerumType> getActiveSerumRatio()
+    {
+        // Gives more chance to get serum where you are missing life
+        List<Serum.SerumType> activeSerumsWithRatio = new List<Serum.SerumType>();
+        foreach (var lifeBar in lifeBars)
+        {
+            if (activeSerums.Contains(lifeBar.getSerumType()))
+            {
+                int ratio=0;
+                if (lifeBar.life >= 0)
+                {
+                    ratio = (int)((1-lifeBar.life/lifeBar.maxLife)*10);
+                }
+                for(int i=0; i<Math.Max(ratio,1);i++)
+                {
+                    activeSerumsWithRatio.Add(lifeBar.getSerumType());
+                }
+            }
+                
+        }
+        return activeSerumsWithRatio;
     }
 
 }

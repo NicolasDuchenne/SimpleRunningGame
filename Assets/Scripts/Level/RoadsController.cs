@@ -7,6 +7,8 @@ public class RoadsController : MonoBehaviour
     [SerializeField] private Transform serumParentObject;
     [SerializeField] private Transform catalyseursParentObject;
 
+    public bool active {get; private set;}= true;
+
 
 
     public GameController.Levels level {get; private set;} = GameController.Levels.level1;
@@ -23,6 +25,10 @@ public class RoadsController : MonoBehaviour
     public void setLevel(GameController.Levels level)
     {
         this.level = level;
+    }
+    public void setInactive()
+    {
+        active = false;
     }
 
 

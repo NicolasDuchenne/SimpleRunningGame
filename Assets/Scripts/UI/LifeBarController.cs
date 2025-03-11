@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LifeBarController : MonoBehaviour
 {
 
-    [SerializeField] float maxLife = 100f;
+    [SerializeField] public float maxLife {get; private set;}= 100f;
     private Slider healthBar;
     [SerializeField] Serum.SerumType serumType;
     public float life { get; private set; }
@@ -27,6 +27,11 @@ public class LifeBarController : MonoBehaviour
     void Update()
     {
         UpdateLifeBar();
+    }
+
+    public Serum.SerumType getSerumType()
+    {
+        return serumType;
     }
 
 

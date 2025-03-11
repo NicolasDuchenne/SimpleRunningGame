@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class GamePauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu; // Assign this in the Inspector
-    private Button restartButton;
-    private Button resumeButton;
 
     private bool isPaused = false;
 

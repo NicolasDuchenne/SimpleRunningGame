@@ -7,15 +7,16 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float startForwardSpeed = 10f;
-    private float forwardSpeed;
+    public float forwardSpeed {get; private set;}
     [SerializeField] float catchupSpeed = 1f;
     [SerializeField] float speedLose = 0.4f;
     private float totalIncreasePercent=100;
     [SerializeField] float minIncreasePercent = 80;
 
-    public float speedMult=1;
+    private float speedMult=1;
     private float temporaryIncreasePercent;
-    [SerializeField] float lateralSpeed = 20f;
+    [SerializeField] float startLateralSpeed = 10f;
+    private float lateralSpeed;
     private bool isChangingLane = false;
     [SerializeField] float increaseSpeedDelaySec= 3f;
     [SerializeField] float increasePercent = 1f;
@@ -47,9 +48,11 @@ public class PlayerController : MonoBehaviour
         Colliders = transform.Find("Colliders").gameObject;
         playerInputs = GetComponent<PlayerInputs>();
         forwardSpeed = startForwardSpeed;
+        lateralSpeed = startLateralSpeed;
         temporaryIncreasePercent = totalIncreasePercent;
         InvokeRepeating("IncreaseSpeed", increaseSpeedDelaySec, increaseSpeedDelaySec); // Call `ChangeValue` every 2 seconds    
         SetAnimationBlendSpeed();
+
     }
 
     private void IncreaseSpeed()
@@ -81,6 +84,7 @@ public class PlayerController : MonoBehaviour
         temporaryIncreasePercent = Mathf.Lerp(temporaryIncreasePercent, totalIncreasePercent,catchupSpeed*Time.deltaTime);
         speedMult = temporaryIncreasePercent/100;
         forwardSpeed = startForwardSpeed * speedMult;
+        lateralSpeed = startLateralSpeed * speedMult;
         SetAnimationBlendSpeed();
     }
 
