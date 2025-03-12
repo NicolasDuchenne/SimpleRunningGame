@@ -1,0 +1,12 @@
+# Made using Asset Forge (2.4.1)
+
+:materials
+
+[name:stoneDark;color:RGBA(0.403, 0.390, 0.594, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.5;valueB:0;]
+[name:stone;color:RGBA(0.571, 0.559, 0.736, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.5;valueB:0;]
+[name:stoneLight;color:RGBA(0.355, 0.347, 0.469, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.5;valueB:0;]
+[name:_defaultMat;color:RGBA(0.195, 0.265, 0.503, 1.000);scale:(1.0, 1.0);texture:Metal/circuit.png;shader:Default;mapping:0;valueA:0.35;valueB:0.25;]
+
+:models
+
+[name:;collection:Walls;type:wall_edges;position:(-0.0042, -5.0000, 2.5000);rotation:(0.0000, 0.0000, 0.0000);scale:(40.0000, 10.0000, 5.0000);group:;locked:False;hidden:False;materials:stoneDark+stone;]

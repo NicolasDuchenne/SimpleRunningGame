@@ -2,18 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 public class BackgroundManager : MonoBehaviour
 {
-    private string backgroundPath = "Prefabs/Background";
+    //private string backgroundPath = "Prefabs/Background";
     private GameObject Player;
-    private List<GameObject> listBackgroundToSpawn;
+    //private List<GameObject> listBackgroundToSpawn;
+    [SerializeField] GameObject backGroundPrefab;
 
     private GameObject[] backgroundOnStage;
-    [SerializeField] int numberOfbackground = 100;
+    [SerializeField] int numberOfbackground = 10;
     private float fullBackgroundLength = 0;
 
     void Start()
     {
         Player = GameObject.Find("Player");
-        listBackgroundToSpawn = GameController.Instance.LoadPrefabs(backgroundPath);
+        //listBackgroundToSpawn = GameController.Instance.LoadPrefabs(backgroundPath);
         RemoveOldBackground();
         InitBackground();
     }
@@ -45,13 +46,13 @@ public class BackgroundManager : MonoBehaviour
     private float? SpawnBackground(float? pos, int i)
     {
         GameObject background;
-        int n = Random.Range(0, listBackgroundToSpawn.Count);
-        background = listBackgroundToSpawn[n];
+        //int n = Random.Range(0, listBackgroundToSpawn.Count);
+        background = backGroundPrefab;
         backgroundOnStage[i] = Instantiate(background, transform);
         float meshWidth = GetBrackgroundWidth(background);
         if (pos is null)
         {
-            pos = Player.transform.position.z - 2*meshWidth;
+            pos = Player.transform.position.z - meshWidth;
         }
         else
         {
@@ -59,6 +60,7 @@ public class BackgroundManager : MonoBehaviour
         }
         fullBackgroundLength +=meshWidth;
         background.transform.position = new Vector3(background.transform.position.x, background.transform.position.y, (float)pos);
+        Debug.Log(pos);
         return pos;
     }
 
@@ -72,10 +74,10 @@ public class BackgroundManager : MonoBehaviour
         {
             GameObject background = backgroundOnStage[i];
             float meshWidth = GetBrackgroundWidth(background);
-            if(background.transform.position.z + 4*meshWidth<Player.transform.position.z)
-            {
-                fullBackgroundLength-=meshWidth;
+            if(background.transform.position.z + meshWidth<Player.transform.position.z)
+            {         
                 float oldZ = background.transform.position.z;
+                fullBackgroundLength-=meshWidth;
                 float? pos = oldZ + fullBackgroundLength;
                 Destroy(background);
                 SpawnBackground(pos, i);

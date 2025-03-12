@@ -1,0 +1,15 @@
+# Made using Asset Forge (2.4.1)
+
+:materials
+
+[name:wood;color:RGBA(0.749, 0.443, 0.345, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0;valueB:0;]
+[name:woodDark;color:RGBA(0.604, 0.318, 0.231, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0;valueB:0;]
+[name:tan;color:RGBA(0.933, 0.835, 0.663, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0;]
+[name:woodLight;color:RGBA(0.816, 0.580, 0.420, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0;]
+[name:metalLight;color:RGBA(0.698, 0.686, 0.867, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0.25;]
+
+:models
+
+[name:;collection:Swords;type:hilt_long;position:(0.0000, -0.6000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:tan+woodLight;]
+[name:;collection:Swords;type:guard;position:(0.0000, -0.3000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:tan;]
+[name:;collection:Swords;type:blade_skew;position:(0.0000, -0.2000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalLight;]
