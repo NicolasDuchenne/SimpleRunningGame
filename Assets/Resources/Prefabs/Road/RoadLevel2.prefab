@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6498236169742757968
+--- !u!1001 &760335329728517618
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4355583481140925369, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_Name
-      value: RoadLevel1
+      value: RoadLevel2
       objectReference: {fileID: 0}
     - target: {fileID: 8441815105510748249, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,15 +52,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8607895740984258557, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607895740984258557, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
-    - {fileID: 717712512747861521, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
     - {fileID: 7301251407857927890, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
-    - {fileID: 3034272099367053714, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
     - {fileID: 6321558001898391219, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
-    - {fileID: 2733391181613800925, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
-    - {fileID: 5049284595540921551, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
-    - {fileID: 1712956836649180753, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}

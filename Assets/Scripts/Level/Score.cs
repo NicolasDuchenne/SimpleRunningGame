@@ -15,6 +15,7 @@ public class Score : MonoBehaviour
     private float tmpDamagePerRoad;
     public float scoreWithoutDamage {get; private set;} = 0;
     [SerializeField] int multIncreaseRate = 10;
+    public float FPS;
 
     private void Awake()
     {
@@ -45,6 +46,7 @@ public class Score : MonoBehaviour
     {
         time+=Time.deltaTime;
         tmpTimePerRoad+=Time.deltaTime;
+        FPS = 1/Time.deltaTime;
     }
 
     public void IncreaseScore(float value)

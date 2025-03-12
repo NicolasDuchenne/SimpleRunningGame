@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.IntegerTime;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerLife : MonoBehaviour
@@ -33,7 +31,8 @@ public class PlayerLife : MonoBehaviour
     private void ProcessLifeLoseRate()
     {
         //Dynamically compute life lose rate so that we insure that the player the same amount of life per road finished. This way if you go faster you lose more life
-        lifeLoseRate = damagePerRoad*playerController.forwardSpeed/GameController.Instance.roadLength;
+        lifeLoseRate = damagePerRoad*playerController.forwardSpeed/GameController.Instance.roadLength; 
+        //Damage will be slightly lower than that as the currentRoadLength is not equal to the roadLength used here
     }
 
     private void ApplyConstantDamage()

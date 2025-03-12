@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,11 +27,11 @@ public class GameController : MonoBehaviour
 
     public bool playerDead {get; private set;} = false;
 
-    [SerializeField] private string serumsFolderPath = "Assets/Prefabs/Serums/Serums";
-    [SerializeField] private string catalyseursFolderPath = "Assets/Prefabs/Serums/Catalyseurs";
-    private string roadsLevel1Path = "Assets/Prefabs/Road/RoadsLevel1";
-    private string roadsLevel2Path = "Assets/Prefabs/Road/RoadsLevel2";
-    private string roadsLevel3Path = "Assets/Prefabs/Road/RoadsLevel3";
+    private string serumsFolderPath = "Prefabs/Serums/Serums";
+    private string catalyseursFolderPath = "Prefabs/Serums/Catalyseurs";
+    private string roadsLevel1Path = "Prefabs/Road/RoadsLevel1";
+    private string roadsLevel2Path = "Prefabs/Road/RoadsLevel2";
+    private string roadsLevel3Path = "Prefabs/Road/RoadsLevel3";
 
     private List<GameObject> serumPrefabsToSpawn;
     private List<GameObject> serumPrefabsToSpawnFiltered;
@@ -41,6 +39,7 @@ public class GameController : MonoBehaviour
     private List<GameObject> catalyseurPrefabsToSpawnFiltered;
 
     [SerializeField] GameObject firstRoad;
+    [SerializeField] GameObject endOfRoadPlane;
     private List<GameObject> roads;
     private List<GameObject> roadsLevel1;
     private List<GameObject> roadsLevel2;
@@ -100,7 +99,6 @@ public class GameController : MonoBehaviour
     {
         float speedIncreasePercentage = (PlayerController.totalIncreasePercent-100)/(PlayerController.maxIncreasePercent-100);
         roadLength = (int)Mathf.Lerp(minRoadLength, maxRoadLength,speedIncreasePercentage);
-        Debug.Log(roadLength);
     }
 
     private void InitRoads()
@@ -133,6 +131,7 @@ public class GameController : MonoBehaviour
             pos +=tmpRoadLength;
             SpawnObjectsOnRoad(road);
         }
+        endOfRoadPlane.transform.position = new Vector3(0, 0, pos+roadLength/2);
     }
 
     private float getRoadLength(GameObject road)
@@ -178,10 +177,12 @@ public class GameController : MonoBehaviour
             road.GetComponent<RoadsController>().setLevel(level);
             road.GetComponent<RoadsController>().SetRoadLength(roadLength);
             float newRoadLength = getRoadLength(road);
-            road.transform.position = new Vector3(0, 0,z + totalRoadLength+(oldRoadLength+newRoadLength)/2);
+            float pos = z + totalRoadLength+(oldRoadLength+newRoadLength)/2;
+            road.transform.position = new Vector3(0, 0, pos);
             SpawnObjectsOnRoad(road);
             roadsOnStage[indexRoadToProcess] = road;
             Score.Instance.EndOfRoad();
+            endOfRoadPlane.transform.position = new Vector3(0, 0, pos+roadLength/2);
         }
         
     }
@@ -270,12 +271,8 @@ public class GameController : MonoBehaviour
     public List<GameObject> LoadPrefabs(string folderPath)
     {
         List<GameObject> prefabs = new List<GameObject>();
-        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new[] { folderPath });
-        foreach (string guid in prefabGUIDs)
-        {  
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            prefabs.Add(AssetDatabase.LoadAssetAtPath<GameObject>(assetPath));
-        }
+        GameObject[] loadedPrefabs = Resources.LoadAll<GameObject>(folderPath);
+        prefabs.AddRange(loadedPrefabs);
         return prefabs;
     }
 
