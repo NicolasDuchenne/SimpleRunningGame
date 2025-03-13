@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject firstRoad;
     [SerializeField] GameObject endOfRoadPlane;
     private List<GameObject> roads;
+   
 
     private GameObject[] roadsOnStage;
     [SerializeField] int numberOfRoads = 1;
@@ -43,6 +44,10 @@ public class GameController : MonoBehaviour
     private float maxRoadLength = 85;
     [SerializeField] Transform roadParent;
 
+    [SerializeField] private float WallObjectSpawnRate = 50f;
+    [SerializeField] private float RoofObjectSpawnRate = 50f;
+    [SerializeField] private float FloorObjectSpawnRate = 50f;
+
     private void Awake()
     {
         if (Instance != null)
@@ -50,6 +55,19 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
         }
         Instance = this;
+    }
+
+    public float GetWallObjectSpawnRate()
+    {
+        return WallObjectSpawnRate;
+    }
+    public float GetRoofObjectSpawnRate()
+    {
+        return RoofObjectSpawnRate;
+    }
+    public float GetFloorObjectSpawnRate()
+    {
+        return FloorObjectSpawnRate;
     }
 
     private void OnDestroy()

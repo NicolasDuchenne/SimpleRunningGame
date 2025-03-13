@@ -11,9 +11,11 @@ public class PrefabLoader : MonoBehaviour
     private string floorsPath = "Prefabs/Background/Floors";
     public static List<GameObject> listFloorsPrefabs;
 
+    private string roofObjectsPath = "Prefabs/Objects/Roof";
+    public static List<GameObject> listRoofObjectsPrefabs;
     private string wallObjectsPath = "Prefabs/Objects/Wall";
     public static List<GameObject> listWallObjectsPrefabs;
-    public static List<GameObject> listRoofObjectsPrefabs;
+    private string floorObjectsPath = "Prefabs/Objects/Floor";
     public static List<GameObject> listFloorObjectsPrefabs;
 
     private string serumsFolderPath = "Prefabs/Serums/Serums";
@@ -35,6 +37,8 @@ public class PrefabLoader : MonoBehaviour
         listWallsPrefabs = LoadPrefabs(wallsPath);
         listFloorsPrefabs = LoadPrefabs(floorsPath);
         listWallObjectsPrefabs = LoadPrefabs(wallObjectsPath);
+        listRoofObjectsPrefabs = LoadPrefabs(roofObjectsPath);
+        listFloorObjectsPrefabs = LoadPrefabs(floorObjectsPath);
         LoadSerums();
         LoadCatalyseurs();
         LoadRoads();

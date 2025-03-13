@@ -3112,6 +3112,9 @@ MonoBehaviour:
   endOfRoadPlane: {fileID: 1640578083}
   numberOfRoads: 5
   roadParent: {fileID: 531626066}
+  WallObjectSpawnRate: 50
+  RoofObjectSpawnRate: 50
+  FloorObjectSpawnRate: 50
 --- !u!4 &1636231323
 Transform:
   m_ObjectHideFlags: 0

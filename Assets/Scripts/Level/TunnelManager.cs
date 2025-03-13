@@ -14,7 +14,11 @@ public class TunnelManager : MonoBehaviour
     private GameObject InstantiateRandomPrefab(List<GameObject>listPrefab, Transform transform, float probability = 100)
     {
         GameObject prefab = null;
-        if(CheckIfSpawn(probability))
+        if(listPrefab is null)
+        {
+            throw new System.Exception("listPrefab is empty");
+        }
+        if(CheckIfSpawn(probability) )
         {
             int numberOfPrefabs = listPrefab.Count;
             if (numberOfPrefabs>0)
@@ -52,24 +56,24 @@ public class TunnelManager : MonoBehaviour
     {
         Transform leftWallTransform = transform.Find("Walls").transform.Find("LeftWall");
         GameObject prefab = InstantiateRandomPrefab(PrefabLoader.listWallsPrefabs, leftWallTransform);
-        SpawnObject(prefab.transform, PrefabLoader.listWallObjectsPrefabs,50);
+        SpawnObject(prefab.transform, PrefabLoader.listWallObjectsPrefabs,GameController.Instance.GetWallObjectSpawnRate());
 
         Transform rightWallTransform = transform.Find("Walls").transform.Find("RightWall");
         prefab = InstantiateRandomPrefab(PrefabLoader.listWallsPrefabs, rightWallTransform);
-        SpawnObject(prefab.transform, PrefabLoader.listWallObjectsPrefabs,100);
+        SpawnObject(prefab.transform, PrefabLoader.listWallObjectsPrefabs,GameController.Instance.GetWallObjectSpawnRate());
     }
     private void ChoseRoof()
     {
         Transform roofTransform = transform.Find("Roof");
         GameObject prefab =InstantiateRandomPrefab(PrefabLoader.listRoofsPrefabs, roofTransform);
-        //SpawnObject(prefab.transform, PrefabLoader.listRoofObjectsPrefabs);
+        SpawnObject(prefab.transform, PrefabLoader.listRoofObjectsPrefabs,GameController.Instance.GetRoofObjectSpawnRate());
     }
 
     private void ChoseFloor()
     {
         Transform floorTransform = transform.Find("Floor");
         GameObject prefab =InstantiateRandomPrefab(PrefabLoader.listFloorsPrefabs, floorTransform);
-        //SpawnObject(prefab.transform, PrefabLoader.listFloorObjectsPrefabs);
+        SpawnObject(prefab.transform, PrefabLoader.listFloorObjectsPrefabs,GameController.Instance.GetFloorObjectSpawnRate());
     }
 
     
