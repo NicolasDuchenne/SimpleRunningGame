@@ -60,7 +60,6 @@ public class BackgroundManager : MonoBehaviour
         }
         fullBackgroundLength +=meshWidth;
         background.transform.position = new Vector3(background.transform.position.x, background.transform.position.y, (float)pos);
-        Debug.Log(pos);
         return pos;
     }
 

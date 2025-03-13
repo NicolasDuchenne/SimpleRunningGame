@@ -27,23 +27,14 @@ public class GameController : MonoBehaviour
 
     public bool playerDead {get; private set;} = false;
 
-    private string serumsFolderPath = "Prefabs/Serums/Serums";
-    private string catalyseursFolderPath = "Prefabs/Serums/Catalyseurs";
-    private string roadsLevel1Path = "Prefabs/Road/RoadsLevel1";
-    private string roadsLevel2Path = "Prefabs/Road/RoadsLevel2";
-    private string roadsLevel3Path = "Prefabs/Road/RoadsLevel3";
 
-    private List<GameObject> serumPrefabsToSpawn;
     private List<GameObject> serumPrefabsToSpawnFiltered;
-    private List<GameObject> catalyseurPrefabsToSpawn;
+    
     private List<GameObject> catalyseurPrefabsToSpawnFiltered;
 
     [SerializeField] GameObject firstRoad;
     [SerializeField] GameObject endOfRoadPlane;
     private List<GameObject> roads;
-    private List<GameObject> roadsLevel1;
-    private List<GameObject> roadsLevel2;
-    private List<GameObject> roadsLevel3;
 
     private GameObject[] roadsOnStage;
     [SerializeField] int numberOfRoads = 1;
@@ -77,10 +68,7 @@ public class GameController : MonoBehaviour
         PlayerController = Player.GetComponent<PlayerController>();
         Invoke("ChangeToLevel2", level2StartSec);
         Invoke("ChangeToLevel3", level3StartSec);
-        LoadSerums();
-        LoadCatalyseurs();
-        LoadRoads();
-        roads = roadsLevel1;
+        roads = PrefabLoader.roadsLevel1;
         level = Levels.level1;
         playerInLevel = Levels.level1;
         FilterSerumAndCatalyseurs();
@@ -222,13 +210,13 @@ public class GameController : MonoBehaviour
     private void ChangeToLevel2()
     {
         level = Levels.level2;
-        roads = roadsLevel2;    
+        roads = PrefabLoader.roadsLevel2;    
     }
 
     private void ChangeToLevel3()
     {
         level = Levels.level3;
-        roads = roadsLevel3;
+        roads = PrefabLoader.roadsLevel3;
     }
     private void SetLevel(Levels level)
     {
@@ -250,8 +238,8 @@ public class GameController : MonoBehaviour
     }
     private void FilterSerumAndCatalyseurs()
     {
-        serumPrefabsToSpawnFiltered = filterSerums(serumPrefabsToSpawn);
-        catalyseurPrefabsToSpawnFiltered = filterSerums(catalyseurPrefabsToSpawn);
+        serumPrefabsToSpawnFiltered = filterSerums(PrefabLoader.serumPrefabsToSpawn);
+        catalyseurPrefabsToSpawnFiltered = filterSerums(PrefabLoader.catalyseurPrefabsToSpawn);
     }
 
     private void StartLevel2()
@@ -268,28 +256,8 @@ public class GameController : MonoBehaviour
         playerInLevel = Levels.level3;
     }
 
-    public List<GameObject> LoadPrefabs(string folderPath)
-    {
-        List<GameObject> prefabs = new List<GameObject>();
-        GameObject[] loadedPrefabs = Resources.LoadAll<GameObject>(folderPath);
-        prefabs.AddRange(loadedPrefabs);
-        return prefabs;
-    }
 
-    public void LoadSerums()
-    {
-        serumPrefabsToSpawn = LoadPrefabs(serumsFolderPath);
-    }
 
-    public void LoadCatalyseurs()
-    {
-        catalyseurPrefabsToSpawn = LoadPrefabs(catalyseursFolderPath);
-    }
-    public void LoadRoads()
-    {
-        roadsLevel1 = LoadPrefabs(roadsLevel1Path);
-        roadsLevel2 = LoadPrefabs(roadsLevel2Path);
-        roadsLevel3 = LoadPrefabs(roadsLevel3Path);
-    }
+    
     
 }

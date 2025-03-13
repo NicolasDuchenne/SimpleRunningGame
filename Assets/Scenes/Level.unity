@@ -2314,7 +2314,7 @@ MonoBehaviour:
   minIncreasePercent: 50
   startLateralSpeed: 5
   increaseSpeedDelaySec: 1
-  increasePercent: 2
+  increasePercent: 10
   animator: {fileID: 1859544791}
 --- !u!114 &973531841
 MonoBehaviour:
@@ -3085,6 +3085,7 @@ GameObject:
   - component: {fileID: 1636231323}
   - component: {fileID: 1636231322}
   - component: {fileID: 1636231324}
+  - component: {fileID: 1636231325}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -3105,8 +3106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 3
-  level2StartSec: 20
-  level3StartSec: 60
+  level2StartSec: 5
+  level3StartSec: 10
   firstRoad: {fileID: 7375905836258452457, guid: 236e40fcf6e650f4ea3251a7ef15292b, type: 3}
   endOfRoadPlane: {fileID: 1640578083}
   numberOfRoads: 5
@@ -3140,6 +3141,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multIncreaseRate: 10
   FPS: 0
+--- !u!114 &1636231325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636231321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1413aefa53ddf46bafc33bc9c74028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1640578083
 GameObject:
   m_ObjectHideFlags: 0
