@@ -7,15 +7,22 @@ public class RoadsController : MonoBehaviour
     
     [SerializeField] private Transform serumParentObject;
     [SerializeField] private Transform catalyseursParentObject;
+
+    [SerializeField] GameObject backGroundPrefab;
     private GameObject door;
     public bool active {get; private set;}= true;
 
     public GameController.Levels level {get; private set;} = GameController.Levels.Level1;
 
+    private float roadLength = 80f;
+    public float backgroundLength {get; private set;}= 40f;
+
+    [SerializeField] private Transform backgroundTransform;
+
 
     void Start()
     {
-
+        SetRoadLength(roadLength);
         if (serumParentObject == null | catalyseursParentObject == null)
         {
             throw new System.Exception("Parent object non assigné !");
@@ -67,6 +74,16 @@ public class RoadsController : MonoBehaviour
         foreach(Transform plane in transform.Find("Planes").transform)
         {
             plane.localScale = new Vector3(plane.transform.localScale.x, plane.transform.localScale.y, length);
+        }
+    }
+
+    public void SpawnBackgrounds()
+    {
+        foreach(Transform child in backgroundTransform)
+        {
+            GameObject background;
+            background = backGroundPrefab;
+            Instantiate(background, child);
         }
     }
 
