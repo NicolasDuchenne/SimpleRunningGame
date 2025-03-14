@@ -9,9 +9,7 @@ public class RoadsController : MonoBehaviour
 
     public bool active {get; private set;}= true;
 
-
-
-    public GameController.Levels level {get; private set;} = GameController.Levels.level1;
+    public GameController.Levels level {get; private set;} = GameController.Levels.Level1;
 
 
     void Start()

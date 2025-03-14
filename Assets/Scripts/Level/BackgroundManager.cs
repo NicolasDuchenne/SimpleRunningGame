@@ -14,18 +14,9 @@ public class BackgroundManager : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
-        //listBackgroundToSpawn = GameController.Instance.LoadPrefabs(backgroundPath);
-        RemoveOldBackground();
         InitBackground();
     }
 
-    private void RemoveOldBackground()
-    {
-        foreach (GameObject child in transform)
-        {
-            Destroy(child);
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -69,6 +60,7 @@ public class BackgroundManager : MonoBehaviour
     }
     private void UpdateBackground()
     {
+        
         for (int i =numberOfbackground-1; i>=0; i--)
         {
             GameObject background = backgroundOnStage[i];
@@ -77,12 +69,13 @@ public class BackgroundManager : MonoBehaviour
             {         
                 float oldZ = background.transform.position.z;
                 fullBackgroundLength-=meshWidth;
-                float? pos = oldZ + fullBackgroundLength;
+                float pos = oldZ + fullBackgroundLength;
                 Destroy(background);
                 SpawnBackground(pos, i);
                 break;
             }      
         }
+        
     }
 
 

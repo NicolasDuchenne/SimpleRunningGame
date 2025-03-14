@@ -7,12 +7,12 @@ public class GameController : MonoBehaviour
 
     public enum Levels
     {
-        level1,
-        level2,
-        level3
+        Level1,
+        Level2,
+        Level3
     }
     private Levels level;
-    private Levels playerInLevel;
+    public Levels playerInLevel {get; private set;}
     public static GameController Instance;
 
     private GameObject Player;
@@ -34,7 +34,6 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject firstRoad;
     [SerializeField] GameObject endOfRoadPlane;
-    private List<GameObject> roads;
    
 
     private GameObject[] roadsOnStage;
@@ -47,6 +46,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private float WallObjectSpawnRate = 50f;
     [SerializeField] private float RoofObjectSpawnRate = 50f;
     [SerializeField] private float FloorObjectSpawnRate = 50f;
+
 
     private void Awake()
     {
@@ -86,9 +86,11 @@ public class GameController : MonoBehaviour
         PlayerController = Player.GetComponent<PlayerController>();
         Invoke("ChangeToLevel2", level2StartSec);
         Invoke("ChangeToLevel3", level3StartSec);
-        roads = PrefabLoader.roadsLevel1;
-        level = Levels.level1;
-        playerInLevel = Levels.level1;
+        PrefabLoader.LoadRoad(level);
+        level = Levels.Level1;
+        playerInLevel = Levels.Level1;
+        PrefabLoader.LoadBackgroundPrefab(level);
+        PrefabLoader.LoadCollectables();
         FilterSerumAndCatalyseurs();
         InitRoads();
         Score.Instance.initScore();
@@ -96,9 +98,12 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+
         CheckPlayerIsDead();
         UpdateRoadLength();
         UpdateRoad();
+
+        
     }
 
     private void UpdateRoadLength()
@@ -120,8 +125,8 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                int n = Random.Range(0, roads.Count);
-                road = roads[n];
+                int n = Random.Range(0, PrefabLoader.roads.Count);
+                road = PrefabLoader.roads[n];
             }
             
             roadsOnStage[i] = Instantiate(road, roadParent);
@@ -178,8 +183,8 @@ public class GameController : MonoBehaviour
             float z = road.transform.position.z;
             float oldRoadLength = getRoadLength(road);
             Destroy(road);
-            int n = Random.Range(0, roads.Count);
-            road = Instantiate(roads[n], roadParent);
+            int n = Random.Range(0, PrefabLoader.roads.Count);
+            road = Instantiate(PrefabLoader.roads[n], roadParent);
             road.GetComponent<RoadsController>().setLevel(level);
             road.GetComponent<RoadsController>().SetRoadLength(roadLength);
             float newRoadLength = getRoadLength(road);
@@ -227,25 +232,27 @@ public class GameController : MonoBehaviour
 
     private void ChangeToLevel2()
     {
-        level = Levels.level2;
-        roads = PrefabLoader.roadsLevel2;    
+        level = Levels.Level2;
+        PrefabLoader.LoadRoad(level);
+        PrefabLoader.LoadBackgroundPrefab(level);   
     }
 
     private void ChangeToLevel3()
     {
-        level = Levels.level3;
-        roads = PrefabLoader.roadsLevel3;
+        level = Levels.Level3;
+        PrefabLoader.LoadRoad(level);
+        PrefabLoader.LoadBackgroundPrefab(level);
     }
     private void SetLevel(Levels level)
     {
         switch (level)
         {
-            case Levels.level2:
+            case Levels.Level2:
             {
                 StartLevel2();
                 break;
             }
-            case Levels.level3:
+            case Levels.Level3:
             {
                 StartLevel3();
                 break;
@@ -264,14 +271,14 @@ public class GameController : MonoBehaviour
     {
         PlayerLife.ActivateLifeBar(Serum.SerumType.gamma);
         maxLane = 2; 
-        playerInLevel = Levels.level2;    
+        playerInLevel = Levels.Level2;    
     }
 
     private void StartLevel3()
     {
         PlayerLife.ActivateLifeBar(Serum.SerumType.iota);
         minLane = -2;  
-        playerInLevel = Levels.level3;
+        playerInLevel = Levels.Level3;
     }
 
 
