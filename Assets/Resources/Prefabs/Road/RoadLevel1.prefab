@@ -20,6 +20,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoadLevel1
       objectReference: {fileID: 0}
+    - target: {fileID: 4522136443131503755, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522136443131503755, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522136443131503755, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522136443131503755, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5613030299128849351, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -27,6 +43,14 @@ PrefabInstance:
     - target: {fileID: 5613030299128849351, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669251169946478023, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669251169946478023, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.75
       objectReference: {fileID: 0}
     - target: {fileID: 6929675331183163003, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_LocalScale.x

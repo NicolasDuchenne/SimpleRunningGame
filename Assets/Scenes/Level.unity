@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
+  m_FogColor: {r: 0.24872431, g: 0.33063045, b: 0.6037736, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.769
   m_LinearFogStart: 100
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backGroundPrefab: {fileID: 4628689172449986154, guid: fff857c43986e774d8bc7718beb7d3dd, type: 3}
-  numberOfbackground: 8
+  numberOfbackground: 10
 --- !u!4 &535238464
 Transform:
   m_ObjectHideFlags: 0
@@ -2313,8 +2313,8 @@ MonoBehaviour:
   speedLose: 1
   minIncreasePercent: 50
   startLateralSpeed: 5
-  increaseSpeedDelaySec: 0.1
-  increasePercent: 20
+  increaseSpeedDelaySec: 1
+  increasePercent: 4
   animator: {fileID: 1859544791}
 --- !u!114 &973531841
 MonoBehaviour:
@@ -2384,6 +2384,7 @@ GameObject:
   - component: {fileID: 987473946}
   - component: {fileID: 987473948}
   - component: {fileID: 987473947}
+  - component: {fileID: 987473949}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2494,6 +2495,19 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!114 &987473949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987473945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5832e38b0f7b0d4a88c8ffa0e22bf7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directionalLight: {fileID: 0}
 --- !u!1 &1364014309
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,7 +3121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laneWidth: 3
   level2StartSec: 5
-  level3StartSec: 5
+  level3StartSec: 20
   firstRoad: {fileID: 7375905836258452457, guid: 236e40fcf6e650f4ea3251a7ef15292b, type: 3}
   endOfRoadPlane: {fileID: 1640578083}
   numberOfRoads: 5
@@ -3185,7 +3199,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 200, y: 1, z: 200}
+  m_LocalScale: {x: 400, y: 1, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 531626066}

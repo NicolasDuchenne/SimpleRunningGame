@@ -8,7 +8,7 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField] GameObject backGroundPrefab;
 
     private GameObject[] backgroundOnStage;
-    [SerializeField] int numberOfbackground = 10;
+    [SerializeField] int numberOfbackground = 10; // mUst be higher than total max length of roads to properly work
     private float fullBackgroundLength = 0;
 
     void Start()
@@ -16,7 +16,7 @@ public class BackgroundManager : MonoBehaviour
         Player = GameObject.Find("Player");
         InitBackground();
     }
-
+    
 
     // Update is called once per frame
     void Update()

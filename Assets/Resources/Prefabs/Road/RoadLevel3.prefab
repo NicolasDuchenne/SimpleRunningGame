@@ -10,7 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4355583481140925369, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_Name
-      value: Road Variant
+      value: RoadLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669251169946478023, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669251169946478023, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.75
       objectReference: {fileID: 0}
     - target: {fileID: 8441815105510748249, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50,6 +58,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8441815105510748249, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8726391202108183531, guid: d7807748e656e8a4fa638794f947b3d6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

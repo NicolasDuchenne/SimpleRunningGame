@@ -47,6 +47,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private float RoofObjectSpawnRate = 50f;
     [SerializeField] private float FloorObjectSpawnRate = 50f;
 
+    private bool spawnDoor = false;
+
 
     private void Awake()
     {
@@ -110,6 +112,7 @@ public class GameController : MonoBehaviour
     {
         float speedIncreasePercentage = (PlayerController.totalIncreasePercent-100)/(PlayerController.maxIncreasePercent-100);
         roadLength = (int)Mathf.Lerp(minRoadLength, maxRoadLength,speedIncreasePercentage);
+        roadLength = 80;
     }
 
     private void InitRoads()
@@ -187,6 +190,11 @@ public class GameController : MonoBehaviour
             road = Instantiate(PrefabLoader.roads[n], roadParent);
             road.GetComponent<RoadsController>().setLevel(level);
             road.GetComponent<RoadsController>().SetRoadLength(roadLength);
+            if(spawnDoor)
+            {
+                road.GetComponent<RoadsController>().ActivateDoor(roadLength);
+                spawnDoor = false;
+            }
             float newRoadLength = getRoadLength(road);
             float pos = z + totalRoadLength+(oldRoadLength+newRoadLength)/2;
             road.transform.position = new Vector3(0, 0, pos);
@@ -235,6 +243,7 @@ public class GameController : MonoBehaviour
         level = Levels.Level2;
         PrefabLoader.LoadRoad(level);
         PrefabLoader.LoadBackgroundPrefab(level);   
+        spawnDoor = true;
     }
 
     private void ChangeToLevel3()
@@ -242,6 +251,7 @@ public class GameController : MonoBehaviour
         level = Levels.Level3;
         PrefabLoader.LoadRoad(level);
         PrefabLoader.LoadBackgroundPrefab(level);
+        spawnDoor = true;
     }
     private void SetLevel(Levels level)
     {
