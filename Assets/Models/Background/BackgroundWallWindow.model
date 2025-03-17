@@ -10,4 +10,4 @@
 
 :models
 
-[name:;collection:Walls;type:window_largeSections;position:(0.0000, -5.0000, 2.5000);rotation:(0.0000, 0.0000, 0.0000);scale:(40.0000, 10.0000, 5.0000);group:;locked:False;hidden:False;materials:stone+stoneDark+glass;]
+[name:;collection:Walls;type:window_largeSections;position:(0.0000, -7.5000, 2.5000);rotation:(0.0000, 0.0000, 0.0000);scale:(40.0000, 15.0000, 5.0000);group:;locked:False;hidden:False;materials:stone+stoneDark+glass;]

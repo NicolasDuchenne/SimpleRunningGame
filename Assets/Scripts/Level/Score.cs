@@ -13,9 +13,10 @@ public class Score : MonoBehaviour
 
     public float damagePerRoad {get; private set;}
     private float tmpDamagePerRoad;
-    public float scoreWithoutDamage {get; private set;} = 0;
+    public float scoreSameSerum {get; private set;} = 0;
     [SerializeField] int multIncreaseRate = 10;
     public float FPS;
+    public Serum.SerumType lastSerum {get; private set;}
 
     private void Awake()
     {
@@ -49,14 +50,22 @@ public class Score : MonoBehaviour
         FPS = 1/Time.deltaTime;
     }
 
-    public void IncreaseScore(float value)
+    public void IncreaseScore(Serum.SerumType serum)
     {
-        score +=value*mult;
-        scoreWithoutDamage+=1;
-        if ((scoreWithoutDamage % multIncreaseRate) == 0)
+        if (serum == lastSerum)
         {
-            IncreaseMult();
+            scoreSameSerum+=1;
+            if ((scoreSameSerum % multIncreaseRate) == 0)
+            {
+                IncreaseMult();
+            }
         }
+        else
+        {
+            ResetMult();
+        }
+        lastSerum = serum;
+        score +=mult;
     }
 
     public void IncreaseMult()
@@ -66,7 +75,7 @@ public class Score : MonoBehaviour
     public void ResetMult()
     {
         mult = 1;
-        scoreWithoutDamage = 0;
+        scoreSameSerum = 0;
     }
 
     public void IncrementDamage(float damage)

@@ -176,6 +176,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9d8a4705706fb3e4fad1bff1429679d0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6109014d1d5d9ca4dbde0671886154bc, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 9d8a4705706fb3e4fad1bff1429679d0, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 78f84ed79f4e3ce429676a7b56608771, type: 2}
     - target: {fileID: 919132149155446097, guid: 9d8a4705706fb3e4fad1bff1429679d0, type: 3}
       propertyPath: m_Name
       value: BackgroundWall

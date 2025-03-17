@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartLaneChange()
     {
-        if (isChangingLane == false)
+        if (isChangingLane == false & animator.GetBool("Stumble") == false)
         {
             float horizontalInput = playerInputs.horizontalInput;
             if (Math.Abs(horizontalInput) > 0.2f)

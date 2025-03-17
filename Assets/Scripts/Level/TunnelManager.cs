@@ -42,11 +42,11 @@ public class TunnelManager : MonoBehaviour
         }
         return true;
     }
-    private void SpawnObject(GameObject gameObject, List<GameObject> listPrefabs, float probability)
+    private void SpawnObject(GameObject gameObject, List<GameObject> listPrefabs, float probability, string parent="Objects")
     {
         if (gameObject is not null)
         {
-            Transform objects = gameObject.transform.Find("Objects");
+            Transform objects = gameObject.transform.Find(parent);
             foreach(Transform child in objects)
             {
                 InstantiateRandomPrefab(listPrefabs, child, probability);
@@ -54,6 +54,7 @@ public class TunnelManager : MonoBehaviour
         }
         
     }
+
 
     private void ChoseWalls()
     {
@@ -77,6 +78,7 @@ public class TunnelManager : MonoBehaviour
         Transform floorTransform = transform.Find("Floor");
         GameObject prefab =InstantiateRandomPrefab(PrefabLoader.listFloorsPrefabs, floorTransform);
         SpawnObject(prefab, PrefabLoader.listFloorObjectsPrefabs,GameController.Instance.GetFloorObjectSpawnRate());
+        SpawnObject(prefab, PrefabLoader.listChearLeadersPrefabs,GameController.Instance.GetFloorObjectSpawnRate(), "ChearLeaders");
     }
 
     

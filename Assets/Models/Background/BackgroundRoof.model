@@ -9,4 +9,4 @@
 
 :models
 
-[name:;collection:Roofs;type:roof_flatSingle;position:(0.0000, -0.1000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(40.0000, 1.0000, 30.0000);group:;locked:False;hidden:False;materials:stoneLight+stone;]
+[name:;collection:Roofs;type:roof_flatSingle;position:(0.0000, -0.1000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(40.0000, 1.0000, 40.0000);group:;locked:False;hidden:False;materials:stoneLight+stone;]

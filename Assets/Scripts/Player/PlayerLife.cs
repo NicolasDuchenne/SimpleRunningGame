@@ -31,8 +31,8 @@ public class PlayerLife : MonoBehaviour
     private void ProcessLifeLoseRate()
     {
         //Dynamically compute life lose rate so that we insure that the player the same amount of life per road finished. This way if you go faster you lose more life
-        lifeLoseRate = damagePerRoad*playerController.forwardSpeed/GameController.Instance.roadLength; 
-        //Damage will be slightly lower than that as the currentRoadLength is not equal to the roadLength used here
+        lifeLoseRate = damagePerRoad/activeSerums.Count*playerController.forwardSpeed/GameController.Instance.roadLength; 
+        // Total damage is always the same, you get less damage per serum if you have more serum
     }
 
     private void ApplyConstantDamage()
@@ -66,7 +66,7 @@ public class PlayerLife : MonoBehaviour
                     if (isCatalyseur==false)
                     {
                         lifeBarController.Heal(healthGain);
-                        Score.Instance.IncreaseScore(1);
+                        Score.Instance.IncreaseScore(otherSerumType);
                     }
                     else
                     {

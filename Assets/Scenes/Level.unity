@@ -339,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &234494315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -170}
+  m_AnchoredPosition: {x: -100, y: -200}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234494316
@@ -2268,7 +2268,7 @@ MonoBehaviour:
   minIncreasePercent: 50
   startLateralSpeed: 5
   increaseSpeedDelaySec: 1
-  increasePercent: 3
+  increasePercent: 20
   animator: {fileID: 1859544791}
 --- !u!114 &973531841
 MonoBehaviour:
@@ -2287,7 +2287,7 @@ MonoBehaviour:
   - {fileID: 1450686424}
   - {fileID: 1935657259}
   - {fileID: 831323170}
-  damagePerRoad: 6
+  damagePerRoad: 20
 --- !u!114 &973531842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3060,14 +3060,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 3
-  level2StartSec: 20
-  level3StartSec: 50
+  level2StartSec: 5
+  level3StartSec: 40
   firstRoad: {fileID: 7375905836258452457, guid: 236e40fcf6e650f4ea3251a7ef15292b, type: 3}
   endOfRoadPlane: {fileID: 1640578083}
   numberOfRoads: 5
   roadParent: {fileID: 531626066}
   WallObjectSpawnRate: 50
-  RoofObjectSpawnRate: 50
+  RoofObjectSpawnRate: 100
   FloorObjectSpawnRate: 50
   directionalLight: {fileID: 987473948}
 --- !u!4 &1636231323
@@ -3097,7 +3097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb773520f2736a40840a0082d6cf3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multIncreaseRate: 10
+  multIncreaseRate: 3
   FPS: 0
 --- !u!114 &1636231325
 MonoBehaviour:

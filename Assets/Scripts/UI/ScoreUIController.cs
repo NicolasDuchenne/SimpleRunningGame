@@ -21,7 +21,7 @@ public class ScoreUIController : MonoBehaviour
     {
         TimeText.text = $"Time : {Math.Round(Score.Instance.time,1)}";
         ScoreText.text = $"Score: {Score.Instance.score}";
-        MultText.text = $"Mult : {Score.Instance.mult}\nMultFact: {Score.Instance.scoreWithoutDamage}";
+        MultText.text = $"Mult : {Score.Instance.mult}\nLast Serum Type: {Score.Instance.scoreSameSerum}*{Score.Instance.lastSerum}";
         TimePerRoadText.text = $"TPR : {Score.Instance.timePerRoad}";
         DamagePerRoadText.text = $"DPR : {Score.Instance.damagePerRoad}";
         FPSText.text = $"FPS : {Score.Instance.FPS}";
