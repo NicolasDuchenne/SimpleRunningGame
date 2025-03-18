@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Catalyseur_Gamma
       objectReference: {fileID: 0}
+    - target: {fileID: 8176139312488204004, guid: 7e2205b5062b8cc40a34cf9500acd25b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4da7aaab398951b408da1bec8b80a228, type: 2}
     - target: {fileID: 8261007336108481207, guid: 7e2205b5062b8cc40a34cf9500acd25b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -60,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8945348751042156646, guid: 7e2205b5062b8cc40a34cf9500acd25b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 079702b17352c324fa5805de17fce6ca, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

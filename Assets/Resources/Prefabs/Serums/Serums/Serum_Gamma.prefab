@@ -18,8 +18,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4da7aaab398951b408da1bec8b80a228, type: 2}
     - target: {fileID: 665867301354592264, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_Name
-      value: Gamma
+      value: Serum_Gamma
       objectReference: {fileID: 0}
+    - target: {fileID: 1433260098804297330, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4da7aaab398951b408da1bec8b80a228, type: 2}
+    - target: {fileID: 4172493554500100959, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 19acba2d466a979429a3b8ef203a7b64, type: 2}
     - target: {fileID: 5855605295421324410, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

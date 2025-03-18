@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Serum : MonoBehaviour
 {
+    [SerializeField] float rotationSpeed =1f;
     public enum SerumType
     {
         alpha,
@@ -14,6 +15,11 @@ public class Serum : MonoBehaviour
 
     [SerializeField] float healthGain = 10f;
     [SerializeField] bool isCatalyseur = false;
+
+    public void Update()
+    {
+        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+    }
 
     public SerumType GetSerumType()
     {

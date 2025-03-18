@@ -3061,7 +3061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laneWidth: 3
   level2StartSec: 5
-  level3StartSec: 40
+  level3StartSec: 20
   firstRoad: {fileID: 7375905836258452457, guid: 236e40fcf6e650f4ea3251a7ef15292b, type: 3}
   endOfRoadPlane: {fileID: 1640578083}
   numberOfRoads: 5

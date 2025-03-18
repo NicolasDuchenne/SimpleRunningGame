@@ -70,12 +70,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        
         targetPosition = transform.position;
         ProcessForwardMovement();
         ProcessLane();
         ProcessSpeedPercent();
-        rb.MovePosition(targetPosition);
+        rb.MovePosition(targetPosition); // pas nécéssaire car le rigid body est kinematic.
         
     }
 

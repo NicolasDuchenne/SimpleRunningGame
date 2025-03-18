@@ -18,8 +18,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 915faff01fac6404199c02f818d73ea3, type: 2}
     - target: {fileID: 665867301354592264, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_Name
-      value: Iota
+      value: Serum_Iota
       objectReference: {fileID: 0}
+    - target: {fileID: 1433260098804297330, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: eaca693a204745c4bb20057b38b0bebb, type: 2}
+    - target: {fileID: 4172493554500100959, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 44fa4d49a756d3f4cb769e3ecc1a2155, type: 2}
     - target: {fileID: 5855605295421324410, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

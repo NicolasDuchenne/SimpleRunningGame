@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Serum
       objectReference: {fileID: 0}
+    - target: {fileID: 1433260098804297330, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a116b15c62a1c0f4997dde3e9b05ddfa, type: 2}
     - target: {fileID: 5855605295421324410, guid: 3c189aa44bdc4cb40bd63ccab7b91019, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

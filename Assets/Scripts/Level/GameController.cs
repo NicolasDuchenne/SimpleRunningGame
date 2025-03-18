@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     private GameObject Player;
     private PlayerLife PlayerLife;
     private PlayerController PlayerController;
-
+    [Header("Level Configuration")]
     [SerializeField] public float laneWidth = 3f;
     [SerializeField] float level2StartSec = 5f;
     [SerializeField] float level3StartSec = 10f;
@@ -32,20 +32,25 @@ public class GameController : MonoBehaviour
     
     private List<GameObject> catalyseurPrefabsToSpawnFiltered;
 
-    [SerializeField] GameObject firstRoad;
-    [SerializeField] GameObject endOfRoadPlane;
+
    
 
     private GameObject[] roadsOnStage;
+    [Header("Road")]
+    [SerializeField] GameObject firstRoad;
+    [SerializeField] GameObject endOfRoadPlane;
     [SerializeField] int numberOfRoads = 1;
-    public float roadLength {get; private set;}
     [SerializeField] Transform roadParent;
-
+    public float roadLength {get; private set;}
+    
+    [Header("Object Spawn Rate")]
     [SerializeField] private float WallObjectSpawnRate = 50f;
     [SerializeField] private float RoofObjectSpawnRate = 50f;
     [SerializeField] private float FloorObjectSpawnRate = 50f;
-
+    [Header("Light")]
     [SerializeField] private Light directionalLight;
+
+    
 
     private bool spawnDoor = false;
 
