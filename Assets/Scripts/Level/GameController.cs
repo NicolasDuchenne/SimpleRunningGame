@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour
     
 
     private bool spawnDoor = false;
+    public int malusRoadCount = 0;
 
 
     private void Awake()
@@ -289,6 +290,25 @@ public class GameController : MonoBehaviour
         minLane = -2;  
         playerInLevel = Levels.Level3;
         directionalLight.intensity = 1;
+    }
+
+    private void toggleAllSerums(bool active)
+    {
+        foreach(GameObject road in roadsOnStage)
+        {
+            road.GetComponent<RoadsController>().toggleSerums(active);
+        }
+    }
+
+    public void StartEmptyStreak(float duration)
+    {
+        toggleAllSerums(false);
+        Invoke("StopBlackEnergie", duration);
+    }
+
+    private void StopBlackEnergie()
+    {
+        toggleAllSerums(true);
     }
 
 

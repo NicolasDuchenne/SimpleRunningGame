@@ -72,15 +72,13 @@ public class Bonus : MonoBehaviour
     }
     private void EmptyStreakMalus(GameObject player)
     {
+        GameController.Instance.StartEmptyStreak(malusDuration);
+        player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.gray);
     }
     private void SecondaryEffectMalus(GameObject player)
     {
         player.GetComponent<PlayerLife>().StartSecondaryEffect(malusDuration);
         player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.red);
-    }
-    private void ProcessBonus(GameObject player)
-    {
-        Debug.Log("process bonus");
     }
 
     

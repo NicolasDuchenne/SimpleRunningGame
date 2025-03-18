@@ -10,6 +10,7 @@ public class RoadsController : MonoBehaviour
     [SerializeField] private Transform bonusParentObject;
 
     [SerializeField] GameObject backGroundPrefab;
+    [SerializeField] int minRoadsBonus;
     private GameObject door;
     public bool active {get; private set;}= true;
 
@@ -61,6 +62,14 @@ public class RoadsController : MonoBehaviour
         }
     }
 
+
+    public void toggleSerums(bool active)
+    {
+        foreach (Transform child in serumParentObject)
+        {
+            child.transform.gameObject.SetActive(active);
+        }
+    }
     public void InstantiateCatalyseurs(List<GameObject> prefabsToSpawn)
     {
         foreach (Transform child in catalyseursParentObject)
@@ -73,15 +82,20 @@ public class RoadsController : MonoBehaviour
 
     public void InstantiateBonusMalus()
     {
-        foreach(Transform child in bonusParentObject)
+        if(GameController.Instance.malusRoadCount >=minRoadsBonus) // spawn malus only if two roads have passed, this way we insure that we have 5 seconds between bonus or malus
         {
-            int random = Random.Range(0, 2);
-            List<GameObject> prefabs = random==0?PrefabLoader.bonusPrefabsToSpawn: PrefabLoader.malusPrefabsToSpawn;
+            foreach(Transform child in bonusParentObject)
+            {
+                int random = Random.Range(0, 2);
+                List<GameObject> prefabs = random==0?PrefabLoader.bonusPrefabsToSpawn: PrefabLoader.malusPrefabsToSpawn;
 
-            random = Random.Range(0, prefabs.Count);
-            GameObject randomPrefab = prefabs[random];
-            Instantiate(randomPrefab, child.position, Quaternion.identity, child);
+                random = Random.Range(0, prefabs.Count);
+                GameObject randomPrefab = prefabs[random];
+                Instantiate(randomPrefab, child.position, Quaternion.identity, child);
+                GameController.Instance.malusRoadCount = 0;
+            }
         }
+        GameController.Instance.malusRoadCount++;
     }
 
     public void SetRoadLength(float length)

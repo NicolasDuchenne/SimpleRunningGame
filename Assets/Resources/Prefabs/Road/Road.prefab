@@ -734,6 +734,7 @@ MonoBehaviour:
   catalyseursParentObject: {fileID: 5092050809025846285}
   bonusParentObject: {fileID: 8205718182079442397}
   backGroundPrefab: {fileID: 4628689172449986154, guid: fff857c43986e774d8bc7718beb7d3dd, type: 3}
+  minRoadsBonus: 3
   backgroundTransform: {fileID: 1699361017628392133}
 --- !u!1 &5976974797394299000
 GameObject:
