@@ -5,14 +5,18 @@ using UnityEngine;
 public class PlayerLife : MonoBehaviour
 {
     [SerializeField] LifeBarController[] lifeBars;
-
-
     [SerializeField] float damagePerRoad = 5f;
     private float lifeLoseRate;
 
     public bool isDead { get; private set; }
     public List<Serum.SerumType> activeSerums  {get; private set;}= new List<Serum.SerumType>();
     private PlayerController playerController;
+    private bool adrenalineActive = false;
+    private bool augmentedPhysiologyActive = false;
+    private bool SuperSerum = false;
+    private bool blackEnergieActive = false;
+    
+    private bool SecondaryEffectActive = false;
     void Start()
     {
         isDead = false;
@@ -38,9 +42,17 @@ public class PlayerLife : MonoBehaviour
     private void ApplyConstantDamage()
     {
         float damage = lifeLoseRate * Time.deltaTime;
+        if (adrenalineActive)
+        {
+            damage = 0;
+        }
+        if (blackEnergieActive)
+        {
+            damage = damage * 2;
+        }
         foreach (LifeBarController lifeBarController in lifeBars)
         {
-            TakeDamage(lifeBarController, lifeLoseRate * Time.deltaTime);
+            TakeDamage(lifeBarController, damage);
         }
         Score.Instance.IncrementDamage(damage);
     }
@@ -65,14 +77,24 @@ public class PlayerLife : MonoBehaviour
                     float healthGain = serum.GetHealthGain();
                     if (isCatalyseur==false)
                     {
-                        lifeBarController.Heal(healthGain);
-                        Score.Instance.IncreaseScore(otherSerumType);
+                        if(SuperSerum)
+                        {
+                            healthGain = healthGain * 2;
+                        }
+                        if(SecondaryEffectActive)
+                        {
+                            TakeCatalyseurDamage(lifeBarController, healthGain);
+                        }
+                        else
+                        {
+                            lifeBarController.Heal(healthGain);
+                            Score.Instance.IncreaseScore(otherSerumType);
+                        }
+                        
                     }
                     else
                     {
-                        TakeDamage(lifeBarController,healthGain);
-                        playerController.LoseSpeed();
-                        Score.Instance.ResetMult();
+                        TakeCatalyseurDamage(lifeBarController, healthGain);
                     }     
                 }
             }
@@ -96,11 +118,22 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
+    private void TakeCatalyseurDamage(LifeBarController lifeBarController, float damage)
+    {
+        if (augmentedPhysiologyActive == false)
+        {
+            TakeDamage(lifeBarController,damage);
+            playerController.LoseSpeed();
+            Score.Instance.ResetMult();
+        } 
+    }
+
     private void TakeDamage(LifeBarController lifeBarController, float damage)
     {
         if (isDead == false)
         {
             bool tmpIsDead = lifeBarController.TakeDamage(damage);
+            
             if (tmpIsDead)
             {
                 isDead = true;
@@ -129,6 +162,58 @@ public class PlayerLife : MonoBehaviour
                 
         }
         return activeSerumsWithRatio;
+    }
+
+    public void StartAdrenaline(float duration)
+    {
+        adrenalineActive = true;
+        Invoke("StopAdrenaline", duration);
+    }
+    private void StopAdrenaline()
+    {
+        adrenalineActive = false;
+    }
+
+    public void StartAugmentedPhysiology(float duration)
+    {
+        Debug.Log("start augmented physiology");
+        augmentedPhysiologyActive = true;
+        Invoke("StopAugmentedPhysiology", duration);
+    }
+    private void StopAugmentedPhysiology()
+    {
+        augmentedPhysiologyActive = false;
+    }
+
+    public void StartSuperSerum(float duration)
+    {
+        SuperSerum = true;
+        Invoke("StopSuperSerum", duration);
+    }
+    private void StopSuperSerum()
+    {
+        SuperSerum = false;
+    }
+
+    public void StartBlackEnergie(float duration)
+    {
+        blackEnergieActive = true;
+        Invoke("StopBlackEnergie", duration);
+    }
+
+    private void StopBlackEnergie()
+    {
+        adrenalineActive = false;
+    }
+    public void StartSecondaryEffect(float duration)
+    {
+        SecondaryEffectActive = true;
+        Invoke("StopSecondaryEffect", duration);
+    }
+
+    private void StopSecondaryEffect()
+    {
+        SecondaryEffectActive = false;
     }
 
 }

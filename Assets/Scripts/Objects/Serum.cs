@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Serum : MonoBehaviour
 {
-    [SerializeField] float rotationSpeed =1f;
+    [SerializeField] float rotationSpeed =50f;
     public enum SerumType
     {
         alpha,

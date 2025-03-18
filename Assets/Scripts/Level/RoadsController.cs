@@ -7,6 +7,7 @@ public class RoadsController : MonoBehaviour
     
     [SerializeField] private Transform serumParentObject;
     [SerializeField] private Transform catalyseursParentObject;
+    [SerializeField] private Transform bonusParentObject;
 
     [SerializeField] GameObject backGroundPrefab;
     private GameObject door;
@@ -23,10 +24,11 @@ public class RoadsController : MonoBehaviour
     void Start()
     {
         SetRoadLength(roadLength);
-        if (serumParentObject == null | catalyseursParentObject == null)
+        if (serumParentObject == null | catalyseursParentObject == null | bonusParentObject == null)
         {
             throw new System.Exception("Parent object non assigné !");
         }
+        InstantiateBonusMalus();
     }
 
     public void setLevel(GameController.Levels level)
@@ -65,6 +67,19 @@ public class RoadsController : MonoBehaviour
         {
             int random = Random.Range(0, prefabsToSpawn.Count);
             GameObject randomPrefab = prefabsToSpawn[random];
+            Instantiate(randomPrefab, child.position, Quaternion.identity, child);
+        }
+    }
+
+    public void InstantiateBonusMalus()
+    {
+        foreach(Transform child in bonusParentObject)
+        {
+            int random = Random.Range(0, 2);
+            List<GameObject> prefabs = random==0?PrefabLoader.bonusPrefabsToSpawn: PrefabLoader.malusPrefabsToSpawn;
+
+            random = Random.Range(0, prefabs.Count);
+            GameObject randomPrefab = prefabs[random];
             Instantiate(randomPrefab, child.position, Quaternion.identity, child);
         }
     }

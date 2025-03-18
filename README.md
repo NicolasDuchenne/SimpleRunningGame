@@ -9,5 +9,4 @@
 * Ajouter texture pour les vitres
 * tester les tweeen pour le changement de lane avec DoTween
 * Faire en sorte que le joueur suive du regard un objet qui rend un peu plus jolie le changement de voie (cf cours du 17/03)
-* ajouter les model pour les serums et les catalyseurs
 * passer les triggers dans les serums et les obstacles (si envie parce que pas nécéssaire)

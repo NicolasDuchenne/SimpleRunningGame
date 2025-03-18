@@ -17,9 +17,13 @@ public class PrefabLoader : MonoBehaviour
 
     private static string serumsFolderPath = "Prefabs/Serums/Serums";
     private static string catalyseursFolderPath = "Prefabs/Serums/Catalyseurs";
+    private static string bonusFolderPath = "Prefabs/Bonus/Bonus";
+    private static string malusFolderPath = "Prefabs/Bonus/Malus";
     
     public static List<GameObject> serumPrefabsToSpawn;
     public static List<GameObject> catalyseurPrefabsToSpawn;
+    public static List<GameObject> bonusPrefabsToSpawn;
+    public static List<GameObject> malusPrefabsToSpawn;
     public static List<GameObject> roads;
 
     public static GameController.Levels ObjectLevel;
@@ -57,6 +61,8 @@ public class PrefabLoader : MonoBehaviour
     {
         LoadSerums();
         LoadCatalyseurs();
+        LoadBonus();
+        LoadMalus();
     }
 
     public static void LoadSerums()
@@ -67,6 +73,21 @@ public class PrefabLoader : MonoBehaviour
     public static void LoadCatalyseurs()
     {
         catalyseurPrefabsToSpawn = LoadPrefabs(catalyseursFolderPath);
+    }
+    public static void LoadBonus()
+    {
+        Debug.Log(bonusFolderPath);
+        bonusPrefabsToSpawn = LoadPrefabs(bonusFolderPath);
+        Debug.Log(bonusPrefabsToSpawn.Count);
+        foreach(var elem in bonusPrefabsToSpawn)
+        {
+            Debug.Log(elem);
+        }
+    }
+    public static void LoadMalus()
+    {
+        malusPrefabsToSpawn = LoadPrefabs(malusFolderPath);
+        Debug.Log(malusPrefabsToSpawn.Count);
     }
     public static void LoadRoad(GameController.Levels level)
     {
@@ -81,5 +102,6 @@ public class PrefabLoader : MonoBehaviour
         prefabs.AddRange(loadedPrefabs);
         return prefabs;
     }
+
 
 }
