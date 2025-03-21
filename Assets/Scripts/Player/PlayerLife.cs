@@ -176,7 +176,6 @@ public class PlayerLife : MonoBehaviour
 
     public void StartAugmentedPhysiology(float duration)
     {
-        Debug.Log("start augmented physiology");
         augmentedPhysiologyActive = true;
         Invoke("StopAugmentedPhysiology", duration);
     }

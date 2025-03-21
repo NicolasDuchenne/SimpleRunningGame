@@ -3077,6 +3077,10 @@ MonoBehaviour:
   laneWidth: 3
   level2StartSec: 5
   level3StartSec: 20
+  difficultyIncrease1Sec: 10
+  difficultyIncrease2Sec: 20
+  difficultyIncrease3Sec: 30
+  difficultyIncrease4Sec: 40
   firstRoad: {fileID: 7375905836258452457, guid: 236e40fcf6e650f4ea3251a7ef15292b, type: 3}
   endOfRoadPlane: {fileID: 1640578083}
   numberOfRoads: 5
@@ -3085,6 +3089,7 @@ MonoBehaviour:
   RoofObjectSpawnRate: 100
   FloorObjectSpawnRate: 50
   directionalLight: {fileID: 987473948}
+  malusRoadCount: 0
 --- !u!4 &1636231323
 Transform:
   m_ObjectHideFlags: 0

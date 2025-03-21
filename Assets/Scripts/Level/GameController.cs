@@ -22,6 +22,10 @@ public class GameController : MonoBehaviour
     [SerializeField] public float laneWidth = 3f;
     [SerializeField] float level2StartSec = 5f;
     [SerializeField] float level3StartSec = 10f;
+    [SerializeField] float difficultyIncrease1Sec = 60f;
+    [SerializeField] float difficultyIncrease2Sec = 120f;
+    [SerializeField] float difficultyIncrease3Sec = 180f;
+    [SerializeField] float difficultyIncrease4Sec = 240f;
     public int minLane {get; private set;} = -1;
     public int maxLane {get; private set;} = 1;
 
@@ -49,6 +53,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private float FloorObjectSpawnRate = 50f;
     [Header("Light")]
     [SerializeField] private Light directionalLight;
+
+    private int catalyseurProbabilty = 0;
+    public int bonusProbability {get; private set;} = 10; // bonus probabilty and malus probability must not sum over 100
+    public int malusProbability {get; private set;}= 0;
 
     
 
@@ -94,6 +102,10 @@ public class GameController : MonoBehaviour
         PlayerController = Player.GetComponent<PlayerController>();
         Invoke("ChangeToLevel2", level2StartSec);
         Invoke("ChangeToLevel3", level3StartSec);
+        Invoke("DifficultyIncrease1", difficultyIncrease1Sec);
+        Invoke("DifficultyIncrease2", difficultyIncrease2Sec);
+        Invoke("DifficultyIncrease3", difficultyIncrease3Sec);
+        Invoke("DifficultyIncrease4", difficultyIncrease4Sec);
         PrefabLoader.LoadRoad(level);
         level = Levels.Level1;
         playerInLevel = Levels.Level1;
@@ -211,7 +223,7 @@ public class GameController : MonoBehaviour
     {
         FilterSerumAndCatalyseurs();
         road.GetComponent<RoadsController>().InstantiateSerums(serumPrefabsToSpawnFiltered);
-        road.GetComponent<RoadsController>().InstantiateCatalyseurs(catalyseurPrefabsToSpawnFiltered);
+        road.GetComponent<RoadsController>().InstantiateCatalyseurs(catalyseurPrefabsToSpawnFiltered, catalyseurProbabilty);
     }
 
     private List<GameObject> filterSerums(List<GameObject> inputSerums)
@@ -291,6 +303,33 @@ public class GameController : MonoBehaviour
         playerInLevel = Levels.Level3;
         directionalLight.intensity = 1;
     }
+    private void DifficultyIncrease1()
+    {
+        catalyseurProbabilty = 25;
+        bonusProbability = 20;
+        malusProbability = 10;
+    }
+    private void DifficultyIncrease2()
+    {
+        catalyseurProbabilty = 50;
+        bonusProbability = 40;
+        malusProbability = 20;
+    }
+
+    private void DifficultyIncrease3()
+    {
+        catalyseurProbabilty = 75;
+        bonusProbability = 40;
+        malusProbability = 40;
+    }
+
+    private void DifficultyIncrease4()
+    {
+        catalyseurProbabilty = 100;
+        bonusProbability = 30;
+        malusProbability = 70;
+    }
+
 
     private void toggleAllSerums(bool active)
     {

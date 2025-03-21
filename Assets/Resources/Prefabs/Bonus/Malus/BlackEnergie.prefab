@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5132202246697265947, guid: b79eb742e526ad0459eb835f3fe6c515, type: 3}
       propertyPath: bonusType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7587245960183949803, guid: b79eb742e526ad0459eb835f3fe6c515, type: 3}
       propertyPath: m_LocalPosition.x

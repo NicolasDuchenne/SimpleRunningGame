@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -76,18 +77,11 @@ public class PrefabLoader : MonoBehaviour
     }
     public static void LoadBonus()
     {
-        Debug.Log(bonusFolderPath);
         bonusPrefabsToSpawn = LoadPrefabs(bonusFolderPath);
-        Debug.Log(bonusPrefabsToSpawn.Count);
-        foreach(var elem in bonusPrefabsToSpawn)
-        {
-            Debug.Log(elem);
-        }
     }
     public static void LoadMalus()
     {
         malusPrefabsToSpawn = LoadPrefabs(malusFolderPath);
-        Debug.Log(malusPrefabsToSpawn.Count);
     }
     public static void LoadRoad(GameController.Levels level)
     {
@@ -101,6 +95,16 @@ public class PrefabLoader : MonoBehaviour
         GameObject[] loadedPrefabs = Resources.LoadAll<GameObject>(folderPath);
         prefabs.AddRange(loadedPrefabs);
         return prefabs;
+    }
+
+    public static List<GameObject> ClonePrefabs(List<GameObject> prefabs)
+    {
+        List<GameObject> output = new List<GameObject>();
+        foreach(GameObject elem in prefabs)
+        {
+            output.Add(elem);
+        }
+        return output;
     }
 
 

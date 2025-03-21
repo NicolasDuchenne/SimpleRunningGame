@@ -70,32 +70,63 @@ public class RoadsController : MonoBehaviour
             child.transform.gameObject.SetActive(active);
         }
     }
-    public void InstantiateCatalyseurs(List<GameObject> prefabsToSpawn)
+    public void InstantiateCatalyseurs(List<GameObject> prefabsToSpawn, int probability)
     {
         foreach (Transform child in catalyseursParentObject)
         {
-            int random = Random.Range(0, prefabsToSpawn.Count);
-            GameObject randomPrefab = prefabsToSpawn[random];
-            Instantiate(randomPrefab, child.position, Quaternion.identity, child);
+            if(probability > Random.Range(0,101))
+            {
+                int random = Random.Range(0, prefabsToSpawn.Count);
+                GameObject randomPrefab = prefabsToSpawn[random];
+                Instantiate(randomPrefab, child.position, Quaternion.identity, child);
+            }
         }
     }
+    
 
     public void InstantiateBonusMalus()
     {
+        // We insure that we have an optimal repartition of bonus and malus
         if(GameController.Instance.malusRoadCount >=minRoadsBonus) // spawn malus only if two roads have passed, this way we insure that we have 5 seconds between bonus or malus
         {
+            List<GameObject> bonusPrefabs = PrefabLoader.ClonePrefabs(PrefabLoader.bonusPrefabsToSpawn);
+            List<GameObject> malusPrefabs = PrefabLoader.ClonePrefabs(PrefabLoader.malusPrefabsToSpawn);
             foreach(Transform child in bonusParentObject)
             {
-                int random = Random.Range(0, 2);
-                List<GameObject> prefabs = random==0?PrefabLoader.bonusPrefabsToSpawn: PrefabLoader.malusPrefabsToSpawn;
-
-                random = Random.Range(0, prefabs.Count);
-                GameObject randomPrefab = prefabs[random];
-                Instantiate(randomPrefab, child.position, Quaternion.identity, child);
-                GameController.Instance.malusRoadCount = 0;
+                List<GameObject> prefabs = new List<GameObject>();
+                int random = Random.Range(0, 101);
+                if(GameController.Instance.bonusProbability > random)
+                {
+                    InstantiateAndRemoveBonusMalus(bonusPrefabs, child);
+                    if(bonusPrefabs.Count == 0)
+                    {
+                        bonusPrefabs = PrefabLoader.ClonePrefabs(PrefabLoader.bonusPrefabsToSpawn);
+                    }
+                }
+                else if(GameController.Instance.bonusProbability+GameController.Instance.malusProbability > random)
+                {
+                    InstantiateAndRemoveBonusMalus(malusPrefabs, child);
+                    if(malusPrefabs.Count == 0)
+                    {
+                        malusPrefabs = PrefabLoader.ClonePrefabs(PrefabLoader.malusPrefabsToSpawn);
+                    }
+                }
+                
             }
         }
         GameController.Instance.malusRoadCount++;
+    }
+    private void InstantiateAndRemoveBonusMalus(List<GameObject> prefabs, Transform child)
+    {
+        if (prefabs.Count > 0)
+        {
+            int random = Random.Range(0, prefabs.Count);
+            GameObject randomPrefab = prefabs[random];
+            prefabs.RemoveAt(random);
+            Instantiate(randomPrefab, child.position, Quaternion.identity, child);
+            GameController.Instance.malusRoadCount = 0;
+        }
+        
     }
 
     public void SetRoadLength(float length)
