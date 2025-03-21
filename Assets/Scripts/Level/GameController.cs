@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
     [Header("Light")]
     [SerializeField] private Light directionalLight;
 
-    private int catalyseurProbabilty = 0;
+    private int catalyseurProbabilty = 25;
     public int bonusProbability {get; private set;} = 10; // bonus probabilty and malus probability must not sum over 100
     public int malusProbability {get; private set;}= 0;
 
@@ -305,29 +305,29 @@ public class GameController : MonoBehaviour
     }
     private void DifficultyIncrease1()
     {
-        catalyseurProbabilty = 25;
-        bonusProbability = 20;
-        malusProbability = 10;
+        catalyseurProbabilty += 25;
+        bonusProbability += 20;
+        malusProbability += 10;
     }
     private void DifficultyIncrease2()
     {
-        catalyseurProbabilty = 50;
-        bonusProbability = 40;
-        malusProbability = 20;
+        catalyseurProbabilty += 15;
+        bonusProbability += 20;
+        malusProbability += 10;
     }
 
     private void DifficultyIncrease3()
     {
-        catalyseurProbabilty = 75;
-        bonusProbability = 40;
-        malusProbability = 40;
+        catalyseurProbabilty += 15;
+        //bonusProbability = 40;
+        malusProbability += 20;
     }
 
     private void DifficultyIncrease4()
     {
-        catalyseurProbabilty = 100;
-        bonusProbability = 30;
-        malusProbability = 70;
+        catalyseurProbabilty += 20;
+        bonusProbability -= 10;
+        malusProbability += 30;
     }
 
 

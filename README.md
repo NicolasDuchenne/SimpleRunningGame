@@ -12,3 +12,4 @@
 * passer les triggers dans les serums et les obstacles (si envie parce que pas nécéssaire)
 * Créer un systeme de score
 * Ajouter un screen pour le start menu
+* ameliorer le deplacement lateral en petite vitesse
