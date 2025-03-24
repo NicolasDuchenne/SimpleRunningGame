@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private float speedMult=1;
     private float temporaryIncreasePercent;
-    [SerializeField] float startLateralSpeed = 10f;
-    private float lateralSpeed;
+    [SerializeField] float startCrossLaneTime = 0.3f;
+    private float crossLaneTime;
     private bool isChangingLane = false;
     [SerializeField] float increaseSpeedDelaySec= 3f;
     [SerializeField] float increasePercent = 1f;
@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    private float velocity = 0.0f;
+
 
 
 
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
         Colliders = transform.Find("Colliders").gameObject;
         playerInputs = GetComponent<PlayerInputs>();
         forwardSpeed = startForwardSpeed;
-        lateralSpeed = startLateralSpeed;
+        crossLaneTime = startCrossLaneTime;
         temporaryIncreasePercent = totalIncreasePercent;
         InvokeRepeating("IncreaseSpeed", increaseSpeedDelaySec, increaseSpeedDelaySec); // Call `ChangeValue` every 2 seconds    
         SetAnimationBlendSpeed();
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour
         temporaryIncreasePercent = Mathf.Lerp(temporaryIncreasePercent, totalIncreasePercent,catchupSpeed*Time.deltaTime);
         speedMult = temporaryIncreasePercent/100;
         forwardSpeed = startForwardSpeed * speedMult;
-        lateralSpeed = startLateralSpeed * speedMult;
+        crossLaneTime = startCrossLaneTime / speedMult;
         SetAnimationBlendSpeed();
     }
 
@@ -132,23 +134,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isChangingLane)
         {
-            float minSpeed = 0.5f;
             float tmpX;
-            if (Math.Abs(transform.position.x-targetX)*lateralSpeed<minSpeed) // Compute linear speed if distance*speed is too low else use lerp
-            {
-                tmpX = transform.position.x + Math.Sign(targetX-transform.position.x)*minSpeed*Time.deltaTime;
-                
-                if (Math.Abs(tmpX) > Math.Abs(targetX))
-                {
-                    tmpX = targetX;
-                }
-            }
-            else
-            {
-                tmpX = Mathf.Lerp(transform.position.x, targetX, lateralSpeed * Time.deltaTime);
-            }
+            tmpX = Mathf.SmoothDamp(transform.position.x, targetX, ref velocity, crossLaneTime);
             float distance = Math.Abs(tmpX-targetX);
-            if (distance<0.05)
+            if (distance<0.01)
             {
                 tmpX = targetX;
                 isChangingLane = false;

@@ -17,7 +17,7 @@ public class GamePauseManager : MonoBehaviour
     void Update()
     {
         // Press "Escape" to toggle pause
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)&GameController.Instance.playerDead==false)
         {
             TogglePause();
         }

@@ -3075,15 +3075,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 3
-  level2StartSec: 50
-  level3StartSec: 110
+  level2StartSec: 5
+  level3StartSec: 20
   difficultyIncrease1Sec: 45
   difficultyIncrease2Sec: 90
   difficultyIncrease3Sec: 135
   difficultyIncrease4Sec: 180
   firstRoad: {fileID: 7375905836258452457, guid: 236e40fcf6e650f4ea3251a7ef15292b, type: 3}
   endOfRoadPlane: {fileID: 1640578083}
-  numberOfRoads: 5
+  numberOfRoads: 2
   roadParent: {fileID: 531626066}
   WallObjectSpawnRate: 50
   RoofObjectSpawnRate: 100
