@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private float velocity = 0.0f;
 
+    [SerializeField] GameObject smokeBombPrefab; 
 
 
 
@@ -172,9 +173,9 @@ public class PlayerController : MonoBehaviour
         if (hasDisappeared == false)
         {
             Models.SetActive(false);
-            //Colliders.GetComponent<BoxCollider>().enabled= false;
             Colliders.SetActive(false);
             hasDisappeared = true;
+            SpawnSmokeBomb();
         }
         
     }
@@ -185,8 +186,8 @@ public class PlayerController : MonoBehaviour
         {
             Models.SetActive(true);
             Colliders.SetActive(true);
-            //Colliders.GetComponent<BoxCollider>().enabled= true;
             hasDisappeared = false;
+            //SpawnSmokeBomb();
         } 
     }
 
@@ -207,6 +208,20 @@ public class PlayerController : MonoBehaviour
         {
             other.transform.parent.GetComponent<ObstacleController>().ProcessCollision(speedMult);
             LoseSpeed();
+        }
+    }
+
+    private void SpawnSmokeBomb()
+    {
+        // Instancier le prefab à la position du joueur
+        GameObject smokeBomb = Instantiate(smokeBombPrefab, transform.position, Quaternion.identity);
+
+        // Récupérer le système de particules et jouer l'effet
+        ParticleSystem particleSystem = smokeBomb.GetComponent<ParticleSystem>();
+        if (particleSystem != null)
+        {
+            particleSystem.Play();
+            Destroy(smokeBomb, particleSystem.main.duration + particleSystem.main.startLifetime.constantMax);
         }
     }
 }
