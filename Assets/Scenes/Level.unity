@@ -2400,6 +2400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startForwardSpeed: 13
+  rotationSpeed: 100
   catchupSpeed: 0.2
   speedLose: 1
   minIncreasePercent: 50

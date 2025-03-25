@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6213336468260016342}
+  - component: {fileID: 8684987351001019647}
   m_Layer: 0
   m_Name: ChearGuy
   m_TagString: Untagged
@@ -64,6 +65,21 @@ Transform:
   - {fileID: 5117592658210695102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &8684987351001019647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5070368986568279843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d3fcdde52751a4bb39755602b11b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lagSpeed: 5
+  rotationSpeed: 10
+  animator: {fileID: 3055914080116141746}
 --- !u!1001 &8863748187839484707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,6 +157,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da5f196c3cff1bc4ea0cc3cacdab827e, type: 3}
+--- !u!95 &3055914080116141746 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: da5f196c3cff1bc4ea0cc3cacdab827e, type: 3}
+  m_PrefabInstance: {fileID: 8863748187839484707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8973674590019663048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: da5f196c3cff1bc4ea0cc3cacdab827e, type: 3}

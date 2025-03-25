@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float startForwardSpeed = 10f;
+    [SerializeField] float rotationSpeed = 250f;
     public float forwardSpeed {get; private set;}
     [SerializeField] float catchupSpeed = 1f;
     [SerializeField] float speedLose = 0.4f;
@@ -77,9 +78,14 @@ public class PlayerController : MonoBehaviour
         ProcessForwardMovement();
         ProcessLane();
         ProcessSpeedPercent();
+
+        Vector3 direction = new Vector3(targetPosition.x-transform.position.x, 0, targetPosition.z-transform.position.z);
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime));
         rb.MovePosition(targetPosition); // pas nécéssaire car le rigid body est kinematic.
         
     }
+
 
     private void ProcessSpeedPercent()
     {
@@ -92,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessForwardMovement()
     {
-        targetPosition += Vector3.forward * forwardSpeed * Time.deltaTime;
+        targetPosition.z += forwardSpeed * Time.deltaTime;
     }
     private void ProcessLane()
     {
@@ -163,7 +169,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
             
-            targetPosition += new Vector3(tmpX-transform.position.x, 0, 0);        
+            targetPosition.x += tmpX-transform.position.x;        
         }
     }
 

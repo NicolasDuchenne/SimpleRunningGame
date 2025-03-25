@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
 
     private GameObject Player;
     private PlayerLife PlayerLife;
-    private PlayerController PlayerController;
+    public PlayerController PlayerController {get; private set;}
     [Header("Level Configuration")]
     [SerializeField] public float laneWidth = 3f;
     [SerializeField] float level2StartSec = 5f;
