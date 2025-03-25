@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -53,6 +54,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private float FloorObjectSpawnRate = 50f;
     [Header("Light")]
     [SerializeField] private Light directionalLight;
+    [Header("CheerGuy")]
+    [SerializeField] private Transform cheerGuyTransform;
+
 
     private int catalyseurProbabilty = 25;
     public int bonusProbability {get; private set;} = 10; // bonus probabilty and malus probability must not sum over 100
@@ -61,7 +65,7 @@ public class GameController : MonoBehaviour
     
 
     private bool spawnDoor = false;
-    public int malusRoadCount = 0;
+    public int malusRoadCount {get; set;} = 0 ;
 
 
     private void Awake()
@@ -122,6 +126,7 @@ public class GameController : MonoBehaviour
         CheckPlayerIsDead();
         UpdateRoad();  
     }
+    
 
     private void InitRoads()
     {
@@ -348,6 +353,11 @@ public class GameController : MonoBehaviour
     private void StopBlackEnergie()
     {
         toggleAllSerums(true);
+    }
+
+    public Transform getCheerGuyTransform()
+    {
+        return cheerGuyTransform;
     }
 
 

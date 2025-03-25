@@ -2003,6 +2003,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274a5970dea4cff41b0b8fa9ec5fc4e6, type: 3}
+--- !u!1 &826170072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 826170073}
+  - component: {fileID: 826170074}
+  m_Layer: 0
+  m_Name: CheerGuy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &826170073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826170072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.0068169, y: 4.707737, z: -12.162935}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &826170074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826170072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457078c5d366f6544b010e1f7e5869c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cheerGuyDelay: 0
 --- !u!114 &831323170 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6468399267226531572, guid: 274a5970dea4cff41b0b8fa9ec5fc4e6, type: 3}
@@ -2406,9 +2451,10 @@ MonoBehaviour:
   minIncreasePercent: 50
   startCrossLaneTime: 0.15
   increaseSpeedDelaySec: 1
-  increasePercent: 2
+  increasePercent: 20
   animator: {fileID: 1859544791}
   smokeBombPrefab: {fileID: 5534094735096846166, guid: 10b0ed7972770cd418150234e7851e00, type: 3}
+  CheerGuy: {fileID: 826170072}
 --- !u!114 &973531841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3214,8 +3260,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 3
-  level2StartSec: 50
-  level3StartSec: 150
+  level2StartSec: 5
+  level3StartSec: 15
   difficultyIncrease1Sec: 45
   difficultyIncrease2Sec: 120
   difficultyIncrease3Sec: 180
@@ -3228,7 +3274,7 @@ MonoBehaviour:
   RoofObjectSpawnRate: 100
   FloorObjectSpawnRate: 50
   directionalLight: {fileID: 987473948}
-  malusRoadCount: 0
+  cheerGuyTransform: {fileID: 826170073}
 --- !u!4 &1636231323
 Transform:
   m_ObjectHideFlags: 0
@@ -6602,3 +6648,4 @@ SceneRoots:
   - {fileID: 189087024}
   - {fileID: 1376242122}
   - {fileID: 1364014310}
+  - {fileID: 826170073}

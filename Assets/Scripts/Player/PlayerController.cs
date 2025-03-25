@@ -42,12 +42,13 @@ public class PlayerController : MonoBehaviour
     private float velocity = 0.0f;
 
     [SerializeField] GameObject smokeBombPrefab; 
-
-
+    private CheerGuyGlobalController cheerGuyLevelController;
+    [SerializeField] GameObject CheerGuy;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cheerGuyLevelController = CheerGuy.transform.GetComponent<CheerGuyGlobalController>();
         Models = transform.Find("Models").transform.Find("PlayerModel").transform.Find("head_low").gameObject;
         Colliders = transform.Find("Colliders").gameObject;
         playerInputs = GetComponent<PlayerInputs>();
@@ -70,6 +71,11 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetFloat("Blend", speedMult);
     }
+    
+    public float getForwardSpeed()
+    {
+        return startForwardSpeed*speedMult;
+    }
 
 
     void FixedUpdate()
@@ -91,7 +97,7 @@ public class PlayerController : MonoBehaviour
     {
         temporaryIncreasePercent = Mathf.Lerp(temporaryIncreasePercent, totalIncreasePercent,catchupSpeed*Time.deltaTime);
         speedMult = temporaryIncreasePercent/100;
-        forwardSpeed = startForwardSpeed * speedMult;
+        forwardSpeed = getForwardSpeed();
         crossLaneTime = startCrossLaneTime / speedMult;
         SetAnimationBlendSpeed();
     }
@@ -125,10 +131,10 @@ public class PlayerController : MonoBehaviour
             if (Math.Abs(horizontalInput) > 0.2f)
             {
                 int newLane = Math.Clamp(lane + Math.Sign(horizontalInput) * numberOfLaneChange, GameController.Instance.minLane, GameController.Instance.maxLane);
-                if (lane != newLane)
+
+                if (lane != newLane & cheerGuyLevelController.cheerGuyLane!=newLane)
                 {
                     realNumberOfLaneChange = Math.Abs(lane-newLane);
-                    
                     targetX = transform.position.x + Math.Sign(horizontalInput) * GameController.Instance.laneWidth * realNumberOfLaneChange;
                     isChangingLane = true;
                     lane = newLane;

@@ -6,3 +6,5 @@
 * Ajouter un screen pour le start menu
 * add sound
 * ajouter les malus environnementaux
+* Corriger bug rotation cheer man
+* Ajouter animation pour que le cheerguy perde de la vitesse a la fin et sorte de l'ecran avant le destroy

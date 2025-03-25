@@ -77,9 +77,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d3fcdde52751a4bb39755602b11b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lagSpeed: 5
+  lagSpeed: 0.8
   rotationSpeed: 10
   animator: {fileID: 3055914080116141746}
+  lifeExpectancy: 10
 --- !u!1001 &8863748187839484707
 PrefabInstance:
   m_ObjectHideFlags: 0
