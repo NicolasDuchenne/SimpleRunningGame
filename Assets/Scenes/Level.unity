@@ -2452,7 +2452,7 @@ MonoBehaviour:
   minIncreasePercent: 50
   startCrossLaneTime: 0.15
   increaseSpeedDelaySec: 1
-  increasePercent: 1
+  increasePercent: 20
   animator: {fileID: 1859544791}
   smokeBombPrefab: {fileID: 5534094735096846166, guid: 10b0ed7972770cd418150234e7851e00, type: 3}
   CheerGuy: {fileID: 826170072}
@@ -3261,12 +3261,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 3
-  level2StartSec: 50
-  level3StartSec: 120
+  level2StartSec: 5
+  level3StartSec: 10
   difficultyIncrease1Sec: 45
   difficultyIncrease2Sec: 120
   difficultyIncrease3Sec: 180
   difficultyIncrease4Sec: 240
+  difficultyIncrease5Sec: 300
+  timeBetweenDamageIncrease: 15
+  damageIncrease: 1
   firstRoad: {fileID: 7375905836258452457, guid: 236e40fcf6e650f4ea3251a7ef15292b, type: 3}
   endOfRoadPlane: {fileID: 1640578083}
   numberOfRoads: 5

@@ -6,6 +6,7 @@ public class PlayerLife : MonoBehaviour
 {
     [SerializeField] LifeBarController[] lifeBars;
     [SerializeField] float damagePerRoad = 5f;
+    private float currentDamagePerRoad;
     private float lifeLoseRate;
 
     public bool isDead { get; private set; }
@@ -19,10 +20,15 @@ public class PlayerLife : MonoBehaviour
     private bool SecondaryEffectActive = false;
     void Start()
     {
+        currentDamagePerRoad = damagePerRoad;
         isDead = false;
         ActivateLifeBar(Serum.SerumType.alpha);
         ActivateLifeBar(Serum.SerumType.beta);
         playerController = GetComponent<PlayerController>();
+    }
+    public void IncreaseDamagePerRoad(float value)
+    {
+        currentDamagePerRoad += value;
     }
 
     // Update is called once per frame
@@ -35,7 +41,7 @@ public class PlayerLife : MonoBehaviour
     private void ProcessLifeLoseRate()
     {
         //Dynamically compute life lose rate so that we insure that the player the same amount of life per road finished. This way if you go faster you lose more life
-        lifeLoseRate = damagePerRoad/activeSerums.Count*playerController.forwardSpeed/GameController.Instance.roadLength; 
+        lifeLoseRate = currentDamagePerRoad/activeSerums.Count*playerController.forwardSpeed/GameController.Instance.roadLength; 
         // Total damage is always the same, you get less damage per serum if you have more serum
     }
 

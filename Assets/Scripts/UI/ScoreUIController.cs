@@ -17,7 +17,7 @@ public class ScoreUIController : MonoBehaviour
         {Serum.SerumType.alpha, Color.blue},
         {Serum.SerumType.beta, Color.green},
         {Serum.SerumType.gamma, Color.yellow},
-        {Serum.SerumType.iota, new Color(160, 32, 240)},
+        {Serum.SerumType.iota, new Color(160/255f, 32/255f, 240/255f)},
     };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
