@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class CheerGuyGlobalController : MonoBehaviour
 {
-    [SerializeField] private float cheerGuyDelay =20f;
+    [SerializeField] float delay =20f;
+    [SerializeField] float delayVariation = 15f;
 
     public int? cheerGuyLane=null;
     public bool startCheerGuy {get; private set;}= false;
@@ -27,15 +28,15 @@ public class CheerGuyGlobalController : MonoBehaviour
         }
         if(startCheerGuy == false & startDelay)
         {
-            float delay = cheerGuyDelay + Random.Range(0f, 15f); // 20s + délai aléatoire
-            StartCoroutine(InvokeWithDelay(delay));
+            float realDelay = delay + Random.Range(0f, delayVariation); // 20s + délai aléatoire
+            StartCoroutine(InvokeWithDelay(realDelay));
         }
     }
 
-    IEnumerator InvokeWithDelay(float delay)
+    IEnumerator InvokeWithDelay(float time)
     {
         startDelay = false;
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(time);
         SetStartCheerGuy(true);
         startDelay = true;
     }

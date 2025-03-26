@@ -2047,7 +2047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 457078c5d366f6544b010e1f7e5869c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cheerGuyDelay: 0
+  delay: 20
+  delayVariation: 15
 --- !u!114 &831323170 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6468399267226531572, guid: 274a5970dea4cff41b0b8fa9ec5fc4e6, type: 3}
@@ -2451,7 +2452,7 @@ MonoBehaviour:
   minIncreasePercent: 50
   startCrossLaneTime: 0.15
   increaseSpeedDelaySec: 1
-  increasePercent: 20
+  increasePercent: 1
   animator: {fileID: 1859544791}
   smokeBombPrefab: {fileID: 5534094735096846166, guid: 10b0ed7972770cd418150234e7851e00, type: 3}
   CheerGuy: {fileID: 826170072}
@@ -3260,8 +3261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 3
-  level2StartSec: 5
-  level3StartSec: 15
+  level2StartSec: 50
+  level3StartSec: 120
   difficultyIncrease1Sec: 45
   difficultyIncrease2Sec: 120
   difficultyIncrease3Sec: 180
