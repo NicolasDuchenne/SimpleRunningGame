@@ -11,7 +11,6 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
-        Debug.Log(sharedOptions.masterVolume);
         slider.value = sharedOptions.masterVolume;
         SetMasterVolume(sharedOptions.masterVolume);
 

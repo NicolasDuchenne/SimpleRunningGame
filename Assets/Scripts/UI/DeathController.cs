@@ -1,15 +1,17 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class DeathController : MonoBehaviour
 {
     [SerializeField] private GameObject deathMenu; // Assign this in the Inspector
+    [SerializeField] TMP_InputField nameInputField;
     private bool gameRestarting = false;
     void Start()
     {
         gameRestarting = false;
         if (deathMenu != null)
             deathMenu.SetActive(false);
+        nameInputField.transform.parent.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -19,8 +21,26 @@ public class DeathController : MonoBehaviour
         {
             Time.timeScale = 0; 
             deathMenu.SetActive(true);
-            gameRestarting = true;
-        }
+            if(HighScoreManager.Instance.IsHighScore((int)Score.Instance.score))
+            {
+                nameInputField.transform.parent.gameObject.SetActive(true);
+            }
             
+            gameRestarting = true;
+            
+        }  
     }
+
+    public void SaveHighScore()
+    {
+        string playerName = nameInputField.text;
+        if (!string.IsNullOrWhiteSpace(playerName)) // if a name if filled
+        {
+            HighScoreManager.Instance.AddNewScore(playerName, (int)Score.Instance.score, Score.Instance.time);
+            nameInputField.transform.parent.gameObject.SetActive(false);
+        }
+        
+    }
+
+
 }

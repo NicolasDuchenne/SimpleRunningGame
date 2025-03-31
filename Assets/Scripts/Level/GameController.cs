@@ -347,7 +347,6 @@ public class GameController : MonoBehaviour
 
     public void IncreaseDamagePerRoad()
     {
-        Debug.Log("damage increase");
         PlayerLife.IncreaseDamagePerRoad(damageIncrease);
         Invoke("IncreaseDamagePerRoad", timeBetweenDamageIncrease);
     }
