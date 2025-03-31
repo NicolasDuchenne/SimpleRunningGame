@@ -18,6 +18,8 @@ public class PlayerLife : MonoBehaviour
     private bool blackEnergieActive = false;
     
     private bool SecondaryEffectActive = false;
+
+    private SoundController soundController;
     void Start()
     {
         currentDamagePerRoad = damagePerRoad;
@@ -25,6 +27,7 @@ public class PlayerLife : MonoBehaviour
         ActivateLifeBar(Serum.SerumType.alpha);
         ActivateLifeBar(Serum.SerumType.beta);
         playerController = GetComponent<PlayerController>();
+        soundController = GetComponent<SoundController>();
     }
     public void IncreaseDamagePerRoad(float value)
     {
@@ -96,11 +99,12 @@ public class PlayerLife : MonoBehaviour
                             lifeBarController.Heal(healthGain);
                             Score.Instance.IncreaseScore(otherSerumType);
                         }
-                        
+                        soundController.PlaySerum();
                     }
                     else
                     {
                         TakeCatalyseurDamage(lifeBarController, healthGain);
+                        soundController.PlayCatalyseur();
                     }     
                 }
             }

@@ -54,31 +54,37 @@ public class Bonus : MonoBehaviour
     {
         player.GetComponent<PlayerLife>().StartAdrenaline(bonusDuration);
         player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.green);
+        player.GetComponent<SoundController>().PlayBonus();
     }
     private void AugmentedPhysiologyBonus(GameObject player)
     {
         player.GetComponent<PlayerLife>().StartAugmentedPhysiology(bonusDuration);
         player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.yellow);
+        player.GetComponent<SoundController>().PlayBonus();
     }
     private void SuperSerumBonus(GameObject player)
     {
         player.GetComponent<PlayerLife>().StartSuperSerum(bonusDuration);
         player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.blue);
+        player.GetComponent<SoundController>().PlayBonus();
     }
     private void BlackEnergieMalus(GameObject player)
     {
         player.GetComponent<PlayerLife>().StartBlackEnergie(malusDuration);
         player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.black);
+        player.GetComponent<SoundController>().PlayMalus();
     }
     private void EmptyStreakMalus(GameObject player)
     {
         GameController.Instance.StartEmptyStreak(malusDuration);
         player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.gray);
+        player.GetComponent<SoundController>().PlayMalus();
     }
     private void SecondaryEffectMalus(GameObject player)
     {
         player.GetComponent<PlayerLife>().StartSecondaryEffect(malusDuration);
         player.GetComponent<PlayerBlinkController>().TriggerBlink(bonusDuration, Color.red);
+        player.GetComponent<SoundController>().PlayMalus();
     }
 
     

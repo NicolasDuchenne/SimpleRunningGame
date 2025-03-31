@@ -19,6 +19,7 @@ public class CheerGuyController : MonoBehaviour
     private float slowDownTime;
     private float runTime=0;
     private bool slowingDown=false;
+    [SerializeField] AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,11 +32,12 @@ public class CheerGuyController : MonoBehaviour
     public void SetMove(bool value)
     {
         move = value;
+        audioSource.Play();
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (activeTransform.childCount == 0 & cheerGuyGlobalController.startCheerGuy & GameController.Instance.playerInLevel != GameController.Levels.Level1)
+        if (GameController.Instance.PlayerController.transform.position.z > transform.position.z & activeTransform.childCount == 0 & cheerGuyGlobalController.startCheerGuy & GameController.Instance.playerInLevel != GameController.Levels.Level1)
         {
             GameObject RunningStance = Instantiate(runningStance, transform.position, Quaternion.identity, activeTransform); // We do it like this because if we switch anim from chear to run, or character does not always look forward
             //transform.SetParent(activeTransform, true);

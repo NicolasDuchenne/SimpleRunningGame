@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
     public int malusRoadCount { get; set; } = 0;
 
 
+
     private void Awake()
     {
         if (Instance != null)
@@ -92,6 +93,7 @@ public class GameController : MonoBehaviour
     {
         return FloorObjectSpawnRate;
     }
+
 
     private void OnDestroy()
     {

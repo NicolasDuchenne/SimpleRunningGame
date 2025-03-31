@@ -44,10 +44,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject smokeBombPrefab; 
     private CheerGuyGlobalController cheerGuyLevelController;
     [SerializeField] GameObject CheerGuy;
+    private SoundController soundController;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        soundController = GetComponent<SoundController>();
         cheerGuyLevelController = CheerGuy.transform.GetComponent<CheerGuyGlobalController>();
         Models = transform.Find("Models").transform.Find("PlayerModel").transform.Find("head_low").gameObject;
         Colliders = transform.Find("Colliders").gameObject;
@@ -188,6 +190,7 @@ public class PlayerController : MonoBehaviour
             Colliders.SetActive(false);
             hasDisappeared = true;
             SpawnSmokeBomb();
+            soundController.PlayDisappear();
         }
         
     }
