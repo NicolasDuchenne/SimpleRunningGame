@@ -3656,7 +3656,7 @@ MonoBehaviour:
   - {fileID: 1450686424}
   - {fileID: 1935657259}
   - {fileID: 831323170}
-  damagePerRoad: 200
+  damagePerRoad: 20
   malusDamageMult: 2
 --- !u!114 &973531842
 MonoBehaviour:
