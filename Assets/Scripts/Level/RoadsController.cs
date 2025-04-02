@@ -1,7 +1,8 @@
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Random = UnityEngine.Random;
+
 public class RoadsController : MonoBehaviour
 {
     
@@ -20,6 +21,8 @@ public class RoadsController : MonoBehaviour
     public float backgroundLength {get; private set;}= 40f;
 
     [SerializeField] private Transform backgroundTransform;
+    [SerializeField] private GameObject LightingEffect;
+    [SerializeField] private Transform LightingEffectTransform;
 
 
     void Start()
@@ -30,6 +33,26 @@ public class RoadsController : MonoBehaviour
             throw new System.Exception("Parent object non assigné !");
         }
         InstantiateBonusMalus();
+        if(GameController.Instance.startLightning)
+        {
+            SpawnLightingEffect();
+        }
+        
+    }
+    public void SpawnLightingEffect()
+    {
+        int numberOfLane = GetNumberOflane();
+        int minLane = -Mathf.CeilToInt(numberOfLane/2f)+1;
+        int maxLane = Mathf.FloorToInt(numberOfLane/2f);
+        int lane = Random.Range(minLane, maxLane+1);
+        GameObject lighting = Instantiate(LightingEffect,LightingEffectTransform);
+        //GameObject lighting = Instantiate(LightingEffect, LightingEffectTransform.position, Quaternion.identity, LightingEffectTransform);
+        lighting.transform.position = new Vector3(lane*GameController.Instance.laneWidth,lighting.transform.position.y, lighting.transform.position.z);
+    }
+    private int GetNumberOflane()
+    {
+        int numberOfLane = transform.Find("Planes").childCount;
+        return numberOfLane;
     }
 
     public void setLevel(GameController.Levels level)

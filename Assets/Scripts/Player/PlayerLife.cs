@@ -6,6 +6,7 @@ public class PlayerLife : MonoBehaviour
 {
     [SerializeField] LifeBarController[] lifeBars;
     [SerializeField] float damagePerRoad = 5f;
+    [SerializeField] float malusDamageMult = 2f;
     private float currentDamagePerRoad;
     private float lifeLoseRate;
 
@@ -16,6 +17,7 @@ public class PlayerLife : MonoBehaviour
     private bool augmentedPhysiologyActive = false;
     private bool SuperSerum = false;
     private bool blackEnergieActive = false;
+    private bool lightningActive = false;
     
     private bool SecondaryEffectActive = false;
 
@@ -57,7 +59,11 @@ public class PlayerLife : MonoBehaviour
         }
         if (blackEnergieActive)
         {
-            damage = damage * 2;
+            damage = damage * malusDamageMult;
+        }
+        if (lightningActive)
+        {
+            damage = damage * malusDamageMult;
         }
         foreach (LifeBarController lifeBarController in lifeBars)
         {
@@ -223,6 +229,15 @@ public class PlayerLife : MonoBehaviour
     private void StopSecondaryEffect()
     {
         SecondaryEffectActive = false;
+    }
+
+    public void StartLightningEffect()
+    {
+        lightningActive = true;
+    }
+    public void StopLightningEffect()
+    {
+        lightningActive = false;
     }
 
 }

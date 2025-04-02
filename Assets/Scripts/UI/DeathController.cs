@@ -5,6 +5,10 @@ public class DeathController : MonoBehaviour
 {
     [SerializeField] private GameObject deathMenu; // Assign this in the Inspector
     [SerializeField] TMP_InputField nameInputField;
+
+    [SerializeField] GameObject ScoreDisplayPrefab;
+    [SerializeField] Transform scoreDisplayAnchor;
+    private GameObject highScoreDisplay;
     private bool gameRestarting = false;
     void Start()
     {
@@ -12,6 +16,7 @@ public class DeathController : MonoBehaviour
         if (deathMenu != null)
             deathMenu.SetActive(false);
         nameInputField.transform.parent.gameObject.SetActive(false);
+        highScoreDisplay = Instantiate(ScoreDisplayPrefab, scoreDisplayAnchor);
     }
 
     // Update is called once per frame
@@ -38,6 +43,8 @@ public class DeathController : MonoBehaviour
         {
             HighScoreManager.Instance.AddNewScore(playerName, (int)Score.Instance.score, Score.Instance.time);
             nameInputField.transform.parent.gameObject.SetActive(false);
+            Destroy(highScoreDisplay);
+            highScoreDisplay = Instantiate(ScoreDisplayPrefab, scoreDisplayAnchor);
         }
         
     }

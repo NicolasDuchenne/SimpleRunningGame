@@ -60,6 +60,12 @@ public class GameController : MonoBehaviour
     [Header("CheerGuy")]
     [SerializeField] private Transform cheerGuyTransform;
 
+    [Header("LightningEffect")]
+    [SerializeField] float lightningEffectDelay = 10;
+    [SerializeField] float lightningEffectDelayVariation = 10f;
+    [SerializeField] float lightningDuration = 10f;
+
+    public bool startLightning { get; private set; } = false;
 
     private int catalyseurProbabilty = 25;
     public int bonusProbability { get; private set; } = 10; // bonus probabilty and malus probability must not sum over 100
@@ -125,6 +131,7 @@ public class GameController : MonoBehaviour
         InitRoads();
         Score.Instance.initScore();
         directionalLight.intensity = 0;
+        StopLightning();
     }
 
     void Update()
@@ -374,6 +381,19 @@ public class GameController : MonoBehaviour
     public Transform getCheerGuyTransform()
     {
         return cheerGuyTransform;
+    }
+
+    private void StartLightning()
+    {
+        startLightning = true;
+        Invoke("StopLightning", lightningDuration);
+
+    }
+    private void StopLightning()
+    {
+        startLightning = false;
+        float realDelay = lightningEffectDelay + Random.Range(0f, lightningEffectDelayVariation);
+        Invoke("StartLightning", realDelay);
     }
 
 

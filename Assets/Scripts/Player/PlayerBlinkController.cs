@@ -27,15 +27,28 @@ public class PlayerBlinkController : MonoBehaviour
 
     private IEnumerator BlinkCoroutine(float blinkCount, Color color)
     {
-        modelRenderer.material.color = color;  // Switch to red
+        SetMaterialColor(color);  // Switch to red
         for (int i = 0; i < blinkCount; i++)
         {
-            modelRenderer.material.color = color;
+            SetMaterialColor(color);
             yield return new WaitForSeconds(blinkDuration);
 
-            modelRenderer.material.color = originalColor;
+            SetDefaultColor();
             yield return new WaitForSeconds(blinkDuration);
         }
-        modelRenderer.material.color = originalColor;  // Return to original color
+        SetDefaultColor();  // Return to original color
+    }
+
+    public void SetMaterialColor(Color color)
+    {
+        modelRenderer.material.color = color;
+    }
+    public void SetDefaultColor()
+    {
+        modelRenderer.material.color = originalColor;
+    }
+    public Color GetCurrentColor()
+    {
+        return modelRenderer.material.color;
     }
 }

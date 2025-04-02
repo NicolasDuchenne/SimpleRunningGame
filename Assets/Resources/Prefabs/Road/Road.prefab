@@ -509,6 +509,37 @@ Transform:
   - {fileID: 4922741641232175861}
   m_Father: {fileID: 8441815105510748249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3258465988400694920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6038048428069825259}
+  m_Layer: 0
+  m_Name: LightningEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6038048428069825259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3258465988400694920}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8441815105510748249}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3345115821763459452
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,6 +747,7 @@ Transform:
   - {fileID: 6631973769025649726}
   - {fileID: 7402368574018033512}
   - {fileID: 1699361017628392133}
+  - {fileID: 6038048428069825259}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8701185066931017857
@@ -736,6 +768,8 @@ MonoBehaviour:
   backGroundPrefab: {fileID: 4628689172449986154, guid: fff857c43986e774d8bc7718beb7d3dd, type: 3}
   minRoadsBonus: 3
   backgroundTransform: {fileID: 1699361017628392133}
+  LightingEffect: {fileID: 3521334486846180336, guid: 16629770c513f4b4db80b51ae0bd2be9, type: 3}
+  LightingEffectTransform: {fileID: 6038048428069825259}
 --- !u!1 &5976974797394299000
 GameObject:
   m_ObjectHideFlags: 0
