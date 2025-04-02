@@ -21,14 +21,14 @@ public class GameController : MonoBehaviour
     public PlayerController PlayerController { get; private set; }
     [Header("Level Configuration")]
     [SerializeField] public float laneWidth = 3f;
-    [SerializeField] float level2StartSec = 5f;
-    [SerializeField] float level3StartSec = 10f;
-    [SerializeField] float difficultyIncrease1Sec = 60f;
+    [SerializeField] float level2StartSec = 50f;
+    [SerializeField] float level3StartSec = 150f;
+    [SerializeField] float difficultyIncrease1Sec = 40f;
     [SerializeField] float difficultyIncrease2Sec = 120f;
-    [SerializeField] float difficultyIncrease3Sec = 180f;
-    [SerializeField] float difficultyIncrease4Sec = 240f;
-    [SerializeField] float difficultyIncrease5Sec = 300;
-    [SerializeField] int timeBetweenDamageIncrease = 10;
+    [SerializeField] float difficultyIncrease3Sec = 200f;
+    [SerializeField] float difficultyIncrease4Sec = 300f;
+    [SerializeField] float difficultyIncrease5Sec = 400;
+    [SerializeField] int timeBetweenDamageIncrease = 60;
     [SerializeField] int damageIncrease = 1;
     public int minLane { get; private set; } = -1;
     public int maxLane { get; private set; } = 1;
@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
 
     [Header("Object Spawn Rate")]
     [SerializeField] private float WallObjectSpawnRate = 50f;
-    [SerializeField] private float RoofObjectSpawnRate = 50f;
+    [SerializeField] private float RoofObjectSpawnRate = 100f;
     [SerializeField] private float FloorObjectSpawnRate = 50f;
     [Header("Light")]
     [SerializeField] private Light directionalLight;

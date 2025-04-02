@@ -5273,8 +5273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laneWidth: 3
-  level2StartSec: 40
-  level3StartSec: 1100
+  level2StartSec: 50
+  level3StartSec: 150
   difficultyIncrease1Sec: 40
   difficultyIncrease2Sec: 120
   difficultyIncrease3Sec: 200

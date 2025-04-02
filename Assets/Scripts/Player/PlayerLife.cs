@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLife : MonoBehaviour
 {
     [SerializeField] LifeBarController[] lifeBars;
-    [SerializeField] float damagePerRoad = 5f;
+    [SerializeField] float damagePerRoad = 20f;
     [SerializeField] float malusDamageMult = 2f;
     private float currentDamagePerRoad;
     private float lifeLoseRate;

@@ -7,20 +7,20 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float startForwardSpeed = 10f;
-    [SerializeField] float rotationSpeed = 250f;
+    [SerializeField] float startForwardSpeed = 13f;
+    [SerializeField] float rotationSpeed = 100f;
     public float forwardSpeed {get; private set;}
-    [SerializeField] float catchupSpeed = 1f;
-    [SerializeField] float speedLose = 0.4f;
+    [SerializeField] float catchupSpeed = 0.2f;
+    [SerializeField] float speedLose = 1f;
     public float totalIncreasePercent{get; private set;}=100;
-    [SerializeField] float minIncreasePercent = 80;
+    [SerializeField] float minIncreasePercent = 50;
 
     private float speedMult=1;
     private float temporaryIncreasePercent;
-    [SerializeField] float startCrossLaneTime = 0.3f;
+    [SerializeField] float startCrossLaneTime = 0.15f;
     private float crossLaneTime;
     private bool isChangingLane = false;
-    [SerializeField] float increaseSpeedDelaySec= 3f;
+    [SerializeField] float increaseSpeedDelaySec= 2f;
     [SerializeField] float increasePercent = 1f;
     public float maxIncreasePercent {get; private set;} = 300f ; // need to change player blend animation if this is changed
     private int lane = 0;
