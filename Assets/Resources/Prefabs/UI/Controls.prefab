@@ -75,6 +75,8 @@ MonoBehaviour:
     space
     + right or left : vanish
 
+    escape: pause game
+
 
 '
   m_isRightToLeft: 0
