@@ -38,9 +38,10 @@ public class DeathController : MonoBehaviour
 
     public void SaveHighScore()
     {
-        string playerName = nameInputField.text.Substring(0, 5);
+        string playerName = nameInputField.text;
         if (!string.IsNullOrWhiteSpace(playerName)) // if a name if filled
         {
+            playerName = playerName.Length >= 5 ? playerName.Substring(0, 6) : playerName;
             HighScoreManager.Instance.AddNewScore(playerName, (int)Score.Instance.score, Score.Instance.time);
             nameInputField.transform.parent.gameObject.SetActive(false);
             Destroy(highScoreDisplay);
